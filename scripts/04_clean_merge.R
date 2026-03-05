@@ -131,7 +131,7 @@ pop <- raw$pop_raw %>%
 
 
 # -----------------------
-# CLEAN FLOOD/WILDFIRE DISASTER DATA (EM-DAT)
+# CLEAN FLOOD/WILDFIRE DISASTER DATA (EM-DAT) (2015-2024)
 # -----------------------
 emdat_fw <- raw$emdat_raw_fw %>%
   dplyr::rename(
@@ -161,58 +161,58 @@ emdat_fw <- raw$emdat_raw_fw %>%
     values_fill = NA
   ) %>%
   # Tag as EM-DAT-derived
-  suffix_vars("emdat_fw") %>%
+  suffix_vars("emdat_fw_15_24") %>%
   # -----------------------
 # Merge with population and create per‑capita indicators
 # -----------------------
 dplyr::left_join(pop, by = "Country") %>%
   dplyr::mutate(
     # deaths per 100k population (2024)
-    deaths_per_100k_Flood_emdat_fw    = ifelse(
+    deaths_per_100k_Flood_emdat_fw_15_24    = ifelse(
       !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
-      deaths_total_Flood_emdat_fw / population_2024_pop_wb * 1e5,
+      deaths_total_Flood_emdat_fw_15_24 / population_2024_pop_wb * 1e5,
       NA_real_
     ),
-    deaths_per_100k_Wildfire_emdat_fw = ifelse(
+    deaths_per_100k_Wildfire_emdat_fw_15_24 = ifelse(
       !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
-      deaths_total_Wildfire_emdat_fw / population_2024_pop_wb * 1e5,
+      deaths_total_Wildfire_emdat_fw_15_24 / population_2024_pop_wb * 1e5,
       NA_real_
     ),
     # affected per 100k population (2024)
-    affected_per_100k_Flood_emdat_fw    = ifelse(
+    affected_per_100k_Flood_emdat_fw_15_24    = ifelse(
       !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
-      affected_total_Flood_emdat_fw / population_2024_pop_wb * 1e5,
+      affected_total_Flood_emdat_fw_15_24 / population_2024_pop_wb * 1e5,
       NA_real_
     ),
-    affected_per_100k_Wildfire_emdat_fw = ifelse(
+    affected_per_100k_Wildfire_emdat_fw_15_24 = ifelse(
       !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
-      affected_total_Wildfire_emdat_fw / population_2024_pop_wb * 1e5,
+      affected_total_Wildfire_emdat_fw_15_24 / population_2024_pop_wb * 1e5,
       NA_real_
     ),
     
     # -----------------------
     # Combined totals (Flood + Wildfire)
     # -----------------------
-    deaths_total_all_emdat_fw =
-      rowSums(dplyr::across(c(deaths_total_Flood_emdat_fw,
-                              deaths_total_Wildfire_emdat_fw)), na.rm = TRUE),
+    deaths_total_all_emdat_fw_15_24 =
+      rowSums(dplyr::across(c(deaths_total_Flood_emdat_fw_15_24,
+                              deaths_total_Wildfire_emdat_fw_15_24)), na.rm = TRUE),
     
-    affected_total_all_emdat_fw =
-      rowSums(dplyr::across(c(affected_total_Flood_emdat_fw,
-                              affected_total_Wildfire_emdat_fw)), na.rm = TRUE),
+    affected_total_all_emdat_fw_15_24 =
+      rowSums(dplyr::across(c(affected_total_Flood_emdat_fw_15_24,
+                              affected_total_Wildfire_emdat_fw_15_24)), na.rm = TRUE),
     
     # -----------------------
     # Combined per‑capita measures (per 100k)
     # -----------------------
-    deaths_per_100k_all_emdat_fw = ifelse(
+    deaths_per_100k_all_emdat_fw_15_24 = ifelse(
       !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
-      deaths_total_all_emdat_fw / population_2024_pop_wb * 1e5,
+      deaths_total_all_emdat_fw_15_24 / population_2024_pop_wb * 1e5,
       NA_real_
     ),
     
-    affected_per_100k_all_emdat_fw = ifelse(
+    affected_per_100k_all_emdat_fw_15_24 = ifelse(
       !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
-      affected_total_all_emdat_fw / population_2024_pop_wb * 1e5,
+      affected_total_all_emdat_fw_15_24 / population_2024_pop_wb * 1e5,
       NA_real_
     )
     
@@ -220,7 +220,7 @@ dplyr::left_join(pop, by = "Country") %>%
 
 
 # -----------------------
-# CLEAN FLOOD/WILDFIRE DISASTER DATA (EM-DAT)
+# CLEAN NATURAL/TECH DISASTER DATA (EM-DAT) (2015-2024)
 # -----------------------
 emdat_nt <- raw$emdat_raw_nt %>%
   dplyr::rename(
@@ -242,25 +242,222 @@ emdat_nt <- raw$emdat_raw_nt %>%
     affected_total = sum(total_affected, na.rm = TRUE),
     .groups        = "drop"
   ) %>%
-  # Tag as EM-DAT-derived (natural and technological)
-  suffix_vars("emdat_nt") %>%
+  # Tag as EM-DAT-derived 
+  suffix_vars("emdat_nt_15_24") %>%
   # -----------------------
 # Merge with population and create per‑capita indicators
 # -----------------------
 dplyr::left_join(pop, by = "Country") %>%
 dplyr::mutate(
-  deaths_per_100k_emdat_nt = ifelse(
+  deaths_per_100k_emdat_nt_15_24 = ifelse(
     !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
-    deaths_total_emdat_nt / population_2024_pop_wb * 1e5,
+    deaths_total_emdat_nt_15_24 / population_2024_pop_wb * 1e5,
     NA_real_
   ),
   
-  affected_per_100k_emdat_nt = ifelse(
+  affected_per_100k_emdat_nt_15_24 = ifelse(
     !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
-    affected_total_emdat_nt / population_2024_pop_wb * 1e5,
+    affected_total_emdat_nt_15_24 / population_2024_pop_wb * 1e5,
     NA_real_
   )
 )
+
+
+
+# -----------------------
+# CLEAN IFRC / RED CROSS PEOPLE DATA (2024)
+# -----------------------
+
+ifrc_nat <- raw$ifrc_nat_raw %>%
+  # Standardize country names
+  dplyr::mutate(
+    Country = standardize_country(Country, corrections)
+  ) %>%
+  
+  # 1) Blood donors
+  dplyr::left_join(
+    raw$ifrc_blood %>%
+      dplyr::select(
+        NationalSociety,
+        people_donating_blood = `People.donating.blood`
+      ),
+    by = "NationalSociety"
+  ) %>%
+  # 2) Livelihoods
+  dplyr::left_join(
+    raw$ifrc_liveli %>%
+      dplyr::select(
+        NationalSociety,
+        people_livelihoods = `People.reached.by.livelihoods`
+      ),
+    by = "NationalSociety"
+  ) %>%
+  # 3) Cash transfer
+  dplyr::left_join(
+    raw$ifrc_cash %>%
+      dplyr::select(
+        NationalSociety,
+        people_cash = `People.reached.by.cash.transfer.programming`
+      ),
+    by = "NationalSociety"
+  ) %>%
+  # 4) Shelter
+  dplyr::left_join(
+    raw$ifrc_shelter %>%
+      dplyr::select(
+        NationalSociety,
+        people_shelter = `People.reached.by.shelter`
+      ),
+    by = "NationalSociety"
+  ) %>%
+  # 5) Disaster risk reduction
+  dplyr::left_join(
+    raw$ifrc_risk %>%
+      dplyr::select(
+        NationalSociety,
+        people_risk_reduction = `People.reached.by.disaster.risk.reduction`
+      ),
+    by = "NationalSociety"
+  ) %>%
+  # 6) Long‑term services & development
+  dplyr::left_join(
+    raw$ifrc_dev %>%
+      dplyr::select(
+        NationalSociety,
+        people_longterm = `People.reached.by.long.term.services.and.development.programmes`
+      ),
+    by = "NationalSociety"
+  ) %>%
+  # 7) Disaster response & early recovery
+  dplyr::left_join(
+    raw$ifrc_resp %>%
+      dplyr::select(
+        NationalSociety,
+        people_disaster_response = `People.reached.by.disaster.response.and.early.recovery.programmes`
+      ),
+    by = "NationalSociety"
+  ) %>%
+  # 8) Climate risk activities
+  dplyr::left_join(
+    raw$ifrc_climate %>%
+      dplyr::select(
+        NationalSociety,
+        people_climate = `People.reached.with.activities.to.address.rising.climate.risks`
+      ),
+    by = "NationalSociety"
+  ) %>%
+  # 9) First Aid training
+  dplyr::left_join(
+    raw$ifrc_firstaid %>%
+      dplyr::select(
+        NationalSociety,
+        people_first_aid = `People.trained.in.First.Aid`
+      ),
+    by = "NationalSociety"
+  ) %>%
+  
+  # Convert numeric-like columns to numeric (defensive)
+  dplyr::mutate(
+    dplyr::across(
+      c(
+        Volunteers, Staff,
+        people_donating_blood,
+        people_livelihoods,
+        people_cash,
+        people_shelter,
+        people_risk_reduction,
+        people_longterm,
+        people_disaster_response,
+        people_climate,
+        people_first_aid
+      ),
+      ~ as.numeric(.)
+    )
+  ) %>%
+  
+  # Merge with population and create per‑100k indicators
+  dplyr::left_join(pop, by = "Country") %>%  # brings in population_2024_pop_wb
+  dplyr::mutate(
+    # --- absolute total RC personnel (---
+    volunteers_staff_total = Volunteers + Staff,  # NEW
+    # --- all people reached by crisis programmes ---
+    all_reached_crisis = people_risk_reduction + people_disaster_response + people_climate,
+    
+    volunteers_per_100k = ifelse(
+      !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
+      Volunteers / population_2024_pop_wb * 1e5,
+      NA_real_
+    ),
+    staff_per_100k = ifelse(
+      !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
+      Staff / population_2024_pop_wb * 1e5,
+      NA_real_
+    ),
+    # --- total RC personnel per 100k ---
+    volunteers_staff_per_100k = ifelse(          # NEW
+      !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
+      volunteers_staff_total / population_2024_pop_wb * 1e5,
+      NA_real_
+    ),
+    people_donating_blood_per_100k = ifelse(
+      !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
+      people_donating_blood / population_2024_pop_wb * 1e5,
+      NA_real_
+    ),
+    people_livelihoods_per_100k = ifelse(
+      !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
+      people_livelihoods / population_2024_pop_wb * 1e5,
+      NA_real_
+    ),
+    people_cash_per_100k = ifelse(
+      !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
+      people_cash / population_2024_pop_wb * 1e5,
+      NA_real_
+    ),
+    people_shelter_per_100k = ifelse(
+      !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
+      people_shelter / population_2024_pop_wb * 1e5,
+      NA_real_
+    ),
+    people_risk_reduction_per_100k = ifelse(
+      !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
+      people_risk_reduction / population_2024_pop_wb * 1e5,
+      NA_real_
+    ),
+    people_longterm_per_100k = ifelse(
+      !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
+      people_longterm / population_2024_pop_wb * 1e5,
+      NA_real_
+    ),
+    people_disaster_response_per_100k = ifelse(
+      !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
+      people_disaster_response / population_2024_pop_wb * 1e5,
+      NA_real_
+    ),
+    people_climate_per_100k = ifelse(
+      !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
+      people_climate / population_2024_pop_wb * 1e5,
+      NA_real_
+    ),
+    people_first_aid_per_100k = ifelse(
+      !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
+      people_first_aid / population_2024_pop_wb * 1e5,
+      NA_real_
+    ),
+    all_reached_crisis_per_100k  = ifelse(
+      !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
+      all_reached_crisis / population_2024_pop_wb * 1e5,
+      NA_real_
+    )
+    
+  ) %>%
+  
+  # Drop helper population column (already in master from pop)
+  dplyr::select(-population_2024_pop_wb) %>%
+  
+  # Suffix IFRC variables so they don't clash with others (Country stays as Country)
+  suffix_vars("ifrc_2024")
+
 
 
 # 
@@ -314,9 +511,9 @@ master <- tpt %>%                     # <— anchor dataset
   dplyr::left_join(ndgain,        by = "Country") %>% 
   dplyr::left_join(pop,        by = "Country") %>%
   dplyr::left_join(emdat_fw,        by = "Country") %>%
-  dplyr::left_join(emdat_nt,        by = "Country")
-
-
+  dplyr::left_join(emdat_nt,        by = "Country") %>%
+  dplyr::left_join(ifrc_nat,        by = "Country")
+  
 
 
 # -----------------------

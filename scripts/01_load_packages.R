@@ -18,7 +18,8 @@ required_pkgs <- c(
   reshape2  = "1.4.5",
   broom     = "1.0.12",
   writexl   = "1.5.4",
-  rmarkdown = "2.30"
+  rmarkdown = "2.30",
+  stringr   = "1.6.0"
   
 )
 

@@ -7,31 +7,38 @@ only_numeric <- function(df) {
 }
 
 save_corr_matrix <- function(df, outfile) {
-  # Remove NAs
-  df_clean <- stats::na.omit(df)
+  # 1) Keep only numeric variables
+  num_df <- only_numeric(df)   # your helper: select(where(is.numeric))
   
-  # Keep only numeric variables
-  num_df <- only_numeric(df_clean)
+  # 2) Drop numeric columns that are all NA
+  num_df <- num_df[, colSums(!is.na(num_df)) > 0, drop = FALSE]
   
-  # Only compute correlation if at least 2 numeric vars
+  # 3) Need at least 2 numeric vars with some data
   if (ncol(num_df) >= 2) {
+    
+    # psych::corr.test will handle NAs pairwise
     cor_m <- psych::corr.test(
       num_df,
-      use   = "pairwise",
+      use    = "pairwise",
       method = "pearson"
     )
     
     writexl::write_xlsx(
       list(
         "cor_matrix" = as.data.frame(cor_m$r),
-        "p_values"   = as.data.frame(cor_m$p)
+        "p_values"   = as.data.frame(cor_m$p),
+        "n_pairs"    = as.data.frame(cor_m$n)  # optional: Ns per pair
       ),
       outfile
     )
     
     message("✓ Saved correlation matrix to: ", outfile)
+    
   } else {
-    warning("Not enough numeric columns to compute correlations.")
+    warning(
+      "Not enough numeric columns with data to compute correlations for: ",
+      outfile
+    )
   }
 }
 
@@ -202,7 +209,7 @@ plot_outcome_vs_third_sector <- function(df, yvar, ylab, title, outfile,
 }
 
 
-#' Regression plot: outcome vs Third Sector Size with key stats
+#' Regression plot: outcome vs x (usually 3rd sector related) with key stats
 #'
 #' Creates a scatter plot with linear fit, country labels, and an annotation
 #' box reporting the main regression results (slope, 95% CI, p-value, R-squared, N).
@@ -210,9 +217,11 @@ plot_outcome_vs_third_sector <- function(df, yvar, ylab, title, outfile,
 #' bivariate OLS associations.
 #'
 #' @param df A data frame containing:
-#'   - Third_sector_size (fixed x-axis variable),
+#'   - xvar (x-axis variable),
 #'   - Country (for labels),
 #'   - the column named in `yvar`.
+#' @param xvar String; column name in `df` to plot on the x-axis.
+#' @param xlab X-axis label.
 #' @param yvar String; column name in `df` to plot on the y-axis.
 #' @param ylab Y-axis label.
 #' @param title Plot title.
@@ -222,19 +231,17 @@ plot_outcome_vs_third_sector <- function(df, yvar, ylab, title, outfile,
 #'   lm(as.formula(paste(yvar, "~ Third_sector_size")), data = df).
 #'
 #' @return (Invisibly) the ggplot object.
-plot_regression_third_sector <- function(df, yvar, ylab, title, outfile,
+plot_regression_third_sector <- function(df, xvar, xlab, yvar, ylab, title, outfile,
                                          x_limits = NULL, model = NULL) {
-  # Fixed X variable
-  xvar_name <- "Third_sector_size"
   
   # Drop rows with missing x or y
   df_clean <- df %>%
-    dplyr::select(Country, all_of(xvar_name), all_of(yvar)) %>%
+    dplyr::select(Country, all_of(xvar), all_of(yvar)) %>%
     stats::na.omit()
   
   # Fit model if not supplied
   if (is.null(model)) {
-    f <- as.formula(paste(yvar, "~", xvar_name))
+    f <- as.formula(paste(yvar, "~", xvar))
     model <- lm(f, data = df_clean)
   }
   
@@ -243,7 +250,7 @@ plot_regression_third_sector <- function(df, yvar, ylab, title, outfile,
   gln <- broom::glance(model)
   
   # Extract main term (slope for Third_sector_size)
-  main_row <- tdy[tdy$term == xvar_name, ]
+  main_row <- tdy[tdy$term == xvar, ]
   beta     <- main_row$estimate
   se       <- main_row$std.error
   pval     <- main_row$p.value
@@ -254,7 +261,7 @@ plot_regression_third_sector <- function(df, yvar, ylab, title, outfile,
   n_obs    <- stats::nobs(model)
   
   # Correlation (for reference, not central)
-  r <- cor(df_clean[[xvar_name]], df_clean[[yvar]], use = "complete.obs")
+  r <- cor(df_clean[[xvar]], df_clean[[yvar]], use = "complete.obs")
   
   # Nice labels
   p_label <- if (pval < 0.001) {
@@ -273,7 +280,7 @@ plot_regression_third_sector <- function(df, yvar, ylab, title, outfile,
   )
   
   # For positioning annotation
-  x_vals <- df_clean[[xvar_name]]
+  x_vals <- df_clean[[xvar]]
   y_vals <- df_clean[[yvar]]
   
   
@@ -292,17 +299,20 @@ plot_regression_third_sector <- function(df, yvar, ylab, title, outfile,
   x_annot <- x_range[2] - x_margin * diff(x_range)
   
   if (beta < 0) {
-    y_annot <- y_range[2] - y_margin * diff(y_range)    # near top
+    y_annot <- y_range[2] - y_margin * diff(y_range)  # near top
     vjust   <- 1   # anchor top edge
   } else {
-    y_annot <- y_range[1] + y_margin * diff(y_range)    # near bottom, but this is wrong, sends the annotation box out of the area
-    vjust   <- 0   # anchor bottom edge (THIS is the crucial change)
+    y_annot <- y_range[1] + y_margin * diff(y_range)
+    vjust   <- 0   # anchor bottom edge 
   }
+  
+  # Wrap title over multiple lines if it's long
+  title_wrapped <- stringr::str_wrap(title, width = 60)
 
   # Base plot
   p <- ggplot2::ggplot(
     df_clean,
-    aes(x = .data[[xvar_name]], y = .data[[yvar]])
+    aes(x = .data[[xvar]], y = .data[[yvar]])
   ) +
     ggplot2::geom_point(shape = 20) +
     
@@ -345,8 +355,8 @@ plot_regression_third_sector <- function(df, yvar, ylab, title, outfile,
     
     # Titles & labels
     ggplot2::labs(
-      title = title,
-      x = "Third Sector Size (%)",
+      title = title_wrapped,
+      x = xlab,
       y = ylab
     ) +
     
@@ -409,10 +419,10 @@ load_income_list <- function() {
 
 
 # -----------------------
-# Helper: fit model, run diagnostics, export everything
+# Helper: compute model outputs (no saving)
 # -----------------------
 
-save_model_outputs <- function(model, name_prefix, data_used) {
+get_model_outputs <- function(model) {
   
   # 0. Model components
   tdy <- broom::tidy(model, conf.int = TRUE)
@@ -421,10 +431,12 @@ save_model_outputs <- function(model, name_prefix, data_used) {
   
   # Extract main effect (first non-intercept)
   main_term <- tdy$term[tdy$term != "(Intercept)"][1]
-  main_est  <- tdy$estimate[tdy$term == main_term]
-  main_p    <- tdy$p.value[tdy$term == main_term]
-  main_ci_l <- tdy$conf.low[tdy$term == main_term]
-  main_ci_u <- tdy$conf.high[tdy$term == main_term]
+  main_row  <- tdy[tdy$term == main_term, ]
+  
+  main_est  <- main_row$estimate
+  main_p    <- main_row$p.value
+  main_ci_l <- main_row$conf.low
+  main_ci_u <- main_row$conf.high
   r2        <- gln$r.squared
   
   # 1. Regression assumption tests
@@ -433,10 +445,10 @@ save_model_outputs <- function(model, name_prefix, data_used) {
   dw        <- tryCatch(car::durbinWatsonTest(model), error = function(e) NA)
   bp        <- tryCatch(lmtest::bptest(model),        error = function(e) NA)
   
-  dw_stat <- ifelse(is.list(dw), dw$dw, NA)
-  dw_p    <- ifelse(is.list(dw), dw$p, NA)
-  bp_stat <- ifelse(is.list(bp), bp$statistic, NA)
-  bp_p    <- ifelse(is.list(bp), bp$p.value, NA)
+  dw_stat <- ifelse(is.list(dw), dw$dw, NA_real_)
+  dw_p    <- ifelse(is.list(dw), dw$p,  NA_real_)
+  bp_stat <- ifelse(is.list(bp), as.numeric(bp$statistic), NA_real_)
+  bp_p    <- ifelse(is.list(bp), bp$p.value, NA_real_)
   
   # 2. Assumption Interpretation Logic
   interp_normality <- if (is.na(shapiro_p)) {
@@ -504,54 +516,14 @@ save_model_outputs <- function(model, name_prefix, data_used) {
     "transformations, or alternative models.\n"
   )
   
-  # 4. Export to Excel
-  out_xlsx <- here::here("outputs","regressions", paste0(name_prefix, "_tables.xlsx"))
-  
-  writexl::write_xlsx(
-    list(
-      tidy   = tdy,
-      glance = gln,
-      augment = aug,
-      infer = data.frame(
-        test = c("Shapiro-Wilk (normality)",
-                 "Durbin-Watson (autocorrelation)",
-                 "Breusch-Pagan (heteroscedasticity)"),
-        statistic = c(NA, dw_stat, bp_stat),
-        p_value = c(shapiro_p, dw_p, bp_p),
-        reference = c(
-          "> 0.05 desirable",
-          "≈ 2.0 indicates independence",
-          "> 0.05 desirable"
-        )
-      )
-    ),
-    path = out_xlsx
-  )
-  
-  # 5. Write Summary + Interpretation to TXT
-  out_txt <- here::here("outputs","regressions", paste0(name_prefix, "_summary.txt"))
-  capture.output({
-    cat("\n=== MODEL SUMMARY ===\n")
-    print(summary(model))
-    
-    cat("\n=== DIAGNOSTICS ===\n")
-    print(paste("Shapiro-Wilk p =", round(shapiro_p, 4)))
-    if (is.list(dw)) print(dw)
-    if (is.list(bp)) print(bp)
-    
-    cat(auto_interpretation)
-  }, file = out_txt)
-  
-  # 6. Diagnostic Plots
-  
-  # Residuals vs Fitted
-  p1 <- ggplot2::ggplot(aug, aes(.fitted, .resid)) +
+  # 4. Diagnostic Plots (not saved, just ggplot objects)
+  p1 <- ggplot2::ggplot(aug, ggplot2::aes(.fitted, .resid)) +
     ggplot2::geom_point(shape = 20) +
     ggplot2::geom_hline(yintercept = 0, color = "red", linewidth = 0.5) +
     ggplot2::labs(
       x = "Fitted values",
       y = "Residuals",
-      title = paste0(name_prefix, ": Residuals vs Fitted")
+      title = "Residuals vs Fitted"
     ) +
     ggplot2::theme_bw() +
     ggplot2::theme(
@@ -559,19 +531,13 @@ save_model_outputs <- function(model, name_prefix, data_used) {
       plot.title   = ggplot2::element_text(hjust = 0.5)
     )
   
-  ggplot2::ggsave(
-    here::here("outputs","figures", paste0(name_prefix, "_residuals_vs_fitted.png")),
-    p1, width = 7.2, height = 4.8, dpi = 300
-  )
-  
-  # QQ plot
   qq_df <- data.frame(sample = residuals(model))
   
-  p2 <- ggplot2::ggplot(qq_df, aes(sample = sample)) +
+  p2 <- ggplot2::ggplot(qq_df, ggplot2::aes(sample = sample)) +
     ggplot2::stat_qq(shape = 20) +
     ggplot2::stat_qq_line(color = "red", linewidth = 0.5) +
     ggplot2::labs(
-      title = paste0(name_prefix, ": QQ plot of residuals")
+      title = "QQ plot of residuals"
     ) +
     ggplot2::theme_bw() +
     ggplot2::theme(
@@ -579,10 +545,35 @@ save_model_outputs <- function(model, name_prefix, data_used) {
       plot.title   = ggplot2::element_text(hjust = 0.5)
     )
   
-  ggplot2::ggsave(
-    here::here("outputs","figures", paste0(name_prefix, "_qqplot.png")),
-    p2, width = 7.2, height = 4.8, dpi = 300
+  # 5. Collect diagnostics as a small data.frame
+  diag_df <- data.frame(
+    test      = c("Shapiro-Wilk (normality)",
+                  "Durbin-Watson (autocorrelation)",
+                  "Breusch-Pagan (heteroscedasticity)"),
+    statistic = c(NA,         dw_stat,  bp_stat),
+    p_value   = c(shapiro_p,  dw_p,     bp_p),
+    reference = c(
+      "> 0.05 desirable",
+      "≈ 2.0 indicates independence",
+      "> 0.05 desirable"
+    )
   )
   
-  invisible(TRUE)
+  # 6. Return everything as a list
+  list(
+    tidy        = tdy,
+    glance      = gln,
+    augment     = aug,
+    diagnostics = diag_df,
+    shapiro_p   = shapiro_p,
+    dw_stat     = dw_stat,
+    dw_p        = dw_p,
+    bp_stat     = bp_stat,
+    bp_p        = bp_p,
+    main_term   = main_term,
+    main_row    = main_row,
+    interpretation_text = auto_interpretation,
+    plot_resid  = p1,
+    plot_qq     = p2
+  )
 }

@@ -71,10 +71,10 @@ outcomes <- tibble::tibble(
     # "deaths_per_100k_Wildfire_emdat",
     # "affected_per_100k_Flood_emdat",
     # "affected_per_100k_Wildfire_emdat",
-    # "deaths_per_100k_all_emdat",
-    # "affected_per_100k_all_emdat"
-    "deaths_per_100k_emdat_nt",
-    "affected_per_100k_emdat_nt"
+    "deaths_per_100k_all_emdat_fw_15_24",
+    "affected_per_100k_all_emdat_fw_15_24"
+    # "deaths_per_100k_emdat_nt_15_24",
+    # "affected_per_100k_emdat_nt_15_24"
   ),
   ylab  = c(
     # "INFORM Risk (%)",
@@ -85,10 +85,10 @@ outcomes <- tibble::tibble(
     # "Deaths in Wildfires (2023-2026, per 100k inhabitants)",
     # "Affected by Floods (2023-2026, per 100k inhabitants)",
     # "Affected by Wildfires (2023-2026, per 100k inhabitants)",
-    # "Deaths in Wildfires/Floods (2023-2026, per 100k inhabitants)",
-    # "Affected by Wildfires/Floods (2023-2026, per 100k inhabitants)"
-    "Deaths in Disasters (2023-2026, per 100k inhabitants)",
-    "Affected by Disasters (2023-2026, per 100k inhabitants)"
+    "Deaths in Wildfires/Floods (2015-2024, per 100k inhabitants)",
+    "Affected by Wildfires/Floods (2015-2024, per 100k inhabitants)"
+    # "Deaths in Disasters (2015-2024, per 100k inhabitants)",
+    # "Affected by Disasters (2015-2024, per 100k inhabitants)"
   ),
   short = c(
     # "risk_inform",
@@ -99,8 +99,8 @@ outcomes <- tibble::tibble(
     # "deaths_fires",
     # "aff_floods",
     # "aff_fires",
-    "deaths_disast",
-    "aff_disast"
+    "deaths_fw_15_24",
+    "aff_fw_15_24"
   )
 )
 
