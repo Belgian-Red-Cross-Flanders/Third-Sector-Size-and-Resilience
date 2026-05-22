@@ -19,7 +19,8 @@ required_pkgs <- c(
   broom     = "1.0.12",
   writexl   = "1.5.4",
   rmarkdown = "2.30",
-  stringr   = "1.6.0"
+  stringr   = "1.6.0",
+  sandwich  = "3.1.1"
   
 )
 

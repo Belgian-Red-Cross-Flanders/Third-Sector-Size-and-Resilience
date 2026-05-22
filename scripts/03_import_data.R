@@ -14,23 +14,20 @@ third_raw <- read.xlsx(here::here("data_raw", "All variables_thirdpillar.xlsx"))
 inform_raw <- read.xlsx(here::here("data_raw", "INFORM.xlsx"))
 # 3. ND-GAIN index
 ndgain_raw <- read.xlsx(here::here("data_raw", "ND_GAIN_2023.xlsx"))
-# 4. EM-DAT disasters (floods and wildfires)
-emdat_raw_fw <- read.xlsx(here::here("data_raw", "em_dat_floods_wildfires_2015_24.xlsx"))
-# 4. EM-DAT natural and technological disasters 
-emdat_raw_nt <- read.xlsx(here::here("data_raw", "em_dat_natural_tech_2015_24.xlsx"))
+# 4. OWID disasters (all disasters, long time series)
+owid_raw <- read.xlsx(here::here("data_raw", "OWID_disasters.xlsx"))
 # 6. Population data
 pop_raw <- read.xlsx(here::here("data_raw", "world_bank_population_2024.xlsx"))
 # 7. IFRC people data
 ifrc_nat_raw <- read.xlsx(here::here("data_raw", "rc_people_2024.xlsx"), sheet="National Societies")
-ifrc_blood <- read.xlsx(here::here("data_raw", "rc_people_2024.xlsx"), sheet="People donating blood")
-ifrc_liveli <- read.xlsx(here::here("data_raw", "rc_people_2024.xlsx"), sheet="People reached by livelihoods")
-ifrc_cash <- read.xlsx(here::here("data_raw", "rc_people_2024.xlsx"), sheet="People reached by cash transfer")
-ifrc_shelter <- read.xlsx(here::here("data_raw", "rc_people_2024.xlsx"), sheet="People reached by shelter")
-ifrc_risk <- read.xlsx(here::here("data_raw", "rc_people_2024.xlsx"), sheet="People reached by disaster risk") # merge
-ifrc_dev <- read.xlsx(here::here("data_raw", "rc_people_2024.xlsx"), sheet="People reached by long term ser")
-ifrc_resp <- read.xlsx(here::here("data_raw", "rc_people_2024.xlsx"), sheet="People reached by disaster resp") # merge
-ifrc_climate <- read.xlsx(here::here("data_raw", "rc_people_2024.xlsx"), sheet="People reached with activities ") # merge
 ifrc_firstaid <- read.xlsx(here::here("data_raw", "rc_people_2024.xlsx"), sheet="People trained in First Aid")
+ifrc_income <- read.xlsx(here::here("data_raw", "rc_people_2024.xlsx"), sheet="Income") # in CHF, Swiss Franc
+# 8. UN-OCHA FTS humanitarian funding
+unocha_fund <- read.xlsx(here::here("data_raw", "un_ocha_funding_2024.xlsx"))
+# 9. Eurobarometer surveys data
+eurobarometer <- read.xlsx(here::here("data_raw", "eurobarometer 2024.xlsx"))
+# 10. HDI (UNDP) 2023
+hdi <- read.xlsx(here::here("data_raw", "UNDP_HDI.xlsx")) 
 
 
 # Save raw list ready for cleaning
@@ -39,19 +36,14 @@ saveRDS(
     third_raw = third_raw,
     inform_raw = inform_raw,
     ndgain_raw = ndgain_raw,
-    emdat_raw_fw = emdat_raw_fw,
-    emdat_raw_nt = emdat_raw_nt,
+    owid_raw = owid_raw,    
     pop_raw = pop_raw,
     ifrc_nat_raw = ifrc_nat_raw,
-    ifrc_blood = ifrc_blood,
-    ifrc_liveli = ifrc_liveli,
-    ifrc_cash = ifrc_cash,
-    ifrc_shelter = ifrc_shelter,
-    ifrc_risk = ifrc_risk,
-    ifrc_dev = ifrc_dev,
-    ifrc_resp = ifrc_resp,
-    ifrc_climate = ifrc_climate,
-    ifrc_firstaid = ifrc_firstaid
+    ifrc_firstaid = ifrc_firstaid,
+    ifrc_income = ifrc_income,
+    unocha_fund = unocha_fund,
+    eurobarometer = eurobarometer,
+    hdi = hdi
   ),
   here::here("data_clean", "raw_data.rds")
 )

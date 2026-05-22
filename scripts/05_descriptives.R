@@ -35,133 +35,242 @@ desc_global <- psych::describe(num_df)
 desc_global$variable <- rownames(desc_global); rownames(desc_global) <- NULL
 writexl::write_xlsx(desc_global, here::here("outputs", "descriptives", "02_describe_global_numeric.xlsx"))
 
-# 4) Descriptives by income group -------------------------------------------
-# Your income group lives in Third Pillar: World.Bank.Income.Group_tpt
-income_var <- "World.Bank.Income.Group_tpt"
-if (!income_var %in% names(master)) {
-  warning("Income group variable (World.Bank.Income.Group_tpt) not found. Skipping grouped descriptives.")
-} else {
-  groups <- sort(unique(master[[income_var]]))
-  for (g in groups) {
-    chunk <- master %>% dplyr::filter(.data[[income_var]] == g) %>% only_numeric()
-    if (nrow(chunk) > 0 && ncol(chunk) > 0) {
-      d <- psych::describe(chunk)
-      d$variable <- rownames(d); rownames(d) <- NULL
-      out <- here::here("outputs", "descriptives", paste0("03_describe_numeric_", g, ".xlsx"))
-      writexl::write_xlsx(d, out)
-    }
-  }
-}
 
 
-# 5) Outcomes to plot against 3rd sector size
+# 4) Correlations among third-sector lenses (GLOBAL, all countries) ----------
+# Variables you want to compare among each other (third-sector lenses)
+third_sector_vars <- c(
+  "Total_tpt",
+  "volunteers_per_100k_ifrc_2024",
+  "staff_per_100k_ifrc_2024",
+  "volunteers_staff_per_100k_ifrc_2024",
+  "income_per_100k_ifrc_2024",
+  "people_first_aid_per_100k_ifrc_2024",
+  "volunteer_sp547_eurobar"     
+)
 
-# Each row = one outcome you care about
-# yvar  = column name in `master`
-# ylab  = pretty label for y-axis and titles
-# short = short id to use in filenames
+# Keep only variables that exist and are numeric
+vars_exist <- intersect(third_sector_vars, names(master))
 
-outcomes <- tibble::tibble(
-  yvar  = c(
-    # "risk_inform",
-    # "coping_capacity_inform",
-    # "readiness_ndgain",
-    # "adaptive_capacity_ndgain",
-    # "deaths_per_100k_Flood_emdat",
-    # "deaths_per_100k_Wildfire_emdat",
-    # "affected_per_100k_Flood_emdat",
-    # "affected_per_100k_Wildfire_emdat",
-    "deaths_per_100k_all_emdat_fw_15_24",
-    "affected_per_100k_all_emdat_fw_15_24"
-    # "deaths_per_100k_emdat_nt_15_24",
-    # "affected_per_100k_emdat_nt_15_24"
-  ),
-  ylab  = c(
-    # "INFORM Risk (%)",
-    # "INFORM Coping Capacity (%)",
-    # "ND-GAIN Readiness (%)",
-    # "ND-GAIN Adaptive Capacity (%)",
-    # "Deaths in Floods (2023-2026, per 100k inhabitants)",
-    # "Deaths in Wildfires (2023-2026, per 100k inhabitants)",
-    # "Affected by Floods (2023-2026, per 100k inhabitants)",
-    # "Affected by Wildfires (2023-2026, per 100k inhabitants)",
-    "Deaths in Wildfires/Floods (2015-2024, per 100k inhabitants)",
-    "Affected by Wildfires/Floods (2015-2024, per 100k inhabitants)"
-    # "Deaths in Disasters (2015-2024, per 100k inhabitants)",
-    # "Affected by Disasters (2015-2024, per 100k inhabitants)"
-  ),
-  short = c(
-    # "risk_inform",
-    # "coping_inform",
-    # "readiness_ndgain",
-    # "adaptive_ndgain",
-    # "deaths_floods",
-    # "deaths_fires",
-    # "aff_floods",
-    # "aff_fires",
-    "deaths_fw_15_24",
-    "aff_fw_15_24"
+third_df <- master %>%
+  dplyr::select(dplyr::all_of(vars_exist)) %>%
+  dplyr::select(where(is.numeric))
+
+# Drop columns with too few non-missing values (e.g., < 20 rows)
+min_n <- 20
+enough_data <- vapply(third_df, function(x) sum(!is.na(x)), numeric(1)) >= min_n
+third_df <- third_df[, enough_data, drop = FALSE]
+
+# (Optional) rename columns to shorter labels for plots
+short_names <- tibble::tibble(
+  old = names(third_df),
+  new = dplyr::recode(old,
+                      Total_tpt = "Third sector size (TPT)",
+                      volunteers_per_100k_ifrc_2024 = "RC volunteers /100k",
+                      staff_per_100k_ifrc_2024 = "RC staff /100k",
+                      volunteers_staff_per_100k_ifrc_2024 = "RC vol+staff /100k",
+                      income_per_100k_ifrc_2024 = "RC income /100k",
+                      people_first_aid_per_100k_ifrc_2024 = "First-aid trained /100k",
+                      volunteer_sp547_eurobar = "Eurobarometer: volunteering (%)"
   )
 )
 
-# 5.1) Define income sets for plotting --------------------------------------
+names(third_df) <- short_names$new
 
-income_sets <- load_income_list()
-
-
-# 6) Scatters for all incomes, 4 income groups and 2 combined sets ---------
+# Helper: from Hmisc::rcorr object to tidy data frame
+tidy_rcorr <- function(rc) {
+  r  <- rc$r
+  p  <- rc$P
+  n  <- rc$n
   
-for (set_name in names(income_sets)) {
-  info <- income_sets[[set_name]]
-  
-  # Subset by income group(s)
-  if (is.null(info$levels)) {
-    df_subset <- master
-  } else {
-    df_subset <- master %>%
-      dplyr::filter(.data[[income_var]] %in% info$levels)
+  # Melt to long
+  to_df <- function(M, nm) {
+    as.data.frame(as.table(M), stringsAsFactors = FALSE) |>
+      stats::setNames(c("var1", "var2", nm))
   }
+  dfr <- to_df(r, "estimate")
+  dfp <- to_df(p, "p_value")
+  dfn <- to_df(n, "n")
   
-  # Skip if too small
-  if (nrow(df_subset) < 3) {
-    message("Skipping ", set_name, " (", nrow(df_subset), " rows).")
-    next
-  }
-  
-  # Loop over outcomes
-  for (i in seq_len(nrow(outcomes))) {
-    yvar  <- outcomes$yvar[i]
-    ylab  <- outcomes$ylab[i]
-    short <- outcomes$short[i]
-    
-    plot_title <- paste(
-      "Third Sector Size vs", ylab, "–", info$label
-    )
-    
-    outfile <- here::here(
-      "outputs", "figures",
-      paste0("scatter_thirdsector_", short, "_", info$suffix, ".png")
-    )
-    
-    plot_outcome_vs_third_sector(
-      df      = df_subset,
-      yvar    = yvar,
-      ylab    = ylab,
-      title   = plot_title,
-      outfile = outfile
-    )
-    
-  }
-  
-  
-  outfile <- here::here(
-    "outputs", "descriptives",
-    paste0("corr_", info$suffix, ".xlsx")
-  )
-  
-  save_corr_matrix(df_subset, outfile)
+  dplyr::left_join(dfr, dfp, by = c("var1","var2")) |>
+    dplyr::left_join(dfn, by = c("var1","var2")) |>
+    dplyr::filter(var1 != var2) |>
+    dplyr::mutate(across(c(estimate, p_value, n), as.numeric))
 }
 
+# Compute Spearman (pairwise complete)
+suppressPackageStartupMessages(library(Hmisc))
+spear <- Hmisc::rcorr(as.matrix(third_df), type = "spearman")
+
+spear_tidy <- tidy_rcorr(spear)
+
+# Also save the wide correlation matrices for convenience
+spear_mat <- as.data.frame(spear$r); spear_mat$variable <- rownames(spear_mat); rownames(spear_mat) <- NULL
+
+# # Write a single Excel file with multiple sheets
+# writexl::write_xlsx(
+#   list(
+#     "Spearman_matrix"  = spear_mat,
+#     "Spearman_long"    = spear_tidy
+#   ),
+#   here::here("outputs", "descriptives", "03_correlations_third_sector_global.xlsx")
+# )
+
+# 5) Heatmap Spearman ----------------------------------------
+suppressPackageStartupMessages(library(ggplot2))
+
+# Function to build a heatmap from correlation matrix
+plot_corr_heatmap <- function(cor_mat_df, title, file_out) {
+  # cor_mat_df is a data.frame with columns = variables; last column called "variable"
+  mat <- cor_mat_df
+  rownames(mat) <- mat$variable
+  mat$variable <- NULL
+  
+  # Long format
+  long <- reshape2::melt(as.matrix(mat), varnames = c("var1","var2"), value.name = "r")
+  
+  p <- ggplot(long, aes(x = var1, y = var2, fill = r)) +
+    geom_tile(color = "white", linewidth = 0.3) +
+    scale_fill_gradient2(
+      low = "#d73027", mid = "white", high = "#1a9850",
+      midpoint = 0, limits = c(-1, 1), name = "r"
+    ) +
+    coord_equal() +
+    labs(title = title, x = NULL, y = NULL) +
+    theme_minimal(base_family = "Times New Roman") +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size = 9),
+      axis.text.y = element_text(size = 9),
+      panel.grid = element_blank(),
+      plot.title = element_text(hjust = 0.5, face = "bold")
+    )
+  
+  ggsave(file_out, p, width = 10, height = 9, dpi = 300)
+  invisible(p)
+}
+
+
+plot_corr_heatmap(
+  spear_mat,
+  title   = "Third‑Sector Lenses (Global): Spearman correlations",
+  file_out = here::here("outputs","figures","corr_third_sector_global_spearman.png")
+)
+
+# ---------------------------------------
+
+# 6) Correlations: confounders vs third sector + outcomes ---------------------
+
+third_sector_vars <- c(
+  "Total_tpt",
+  "log1p_volunteers_staff_per_100k_ifrc_2024",
+  "log1p_income_per_100k_ifrc_2024",
+  "log1p_people_first_aid_per_100k_ifrc_2024"
+)
+
+outcome_vars <- c(
+  "coping_capacity_inform",
+  "readiness_ndgain",
+  "adaptive_capacity_ndgain",
+  "log1p_affected_per_100k_15_24_sum_owid"
+)
+
+confounder_vars <- c(
+  "hdi_undp",
+  "gdpPerCapita_tpt",
+  "log1p_funding_per_100k_unocha",
+  "natural_hazard_inform"
+)
+
+all_needed <- c(third_sector_vars, outcome_vars, confounder_vars)
+
+# Keep only those that exist in master and are numeric
+vars_exist <- intersect(all_needed, names(master))
+
+corr_raw <- master %>%
+  dplyr::select(dplyr::all_of(vars_exist)) %>%
+  dplyr::select(where(is.numeric))
+
+# Drop variables with too few non-missing values
+min_n <- 20
+enough_data <- vapply(corr_raw, function(x) sum(!is.na(x)), numeric(1)) >= min_n
+corr_raw <- corr_raw[, enough_data, drop = FALSE]
+
+# Identify which survived the filtering
+vars_kept <- names(corr_raw)
+third_kept <- intersect(third_sector_vars, vars_kept)
+outcome_kept <- intersect(outcome_vars, vars_kept)
+conf_kept <- intersect(confounder_vars, vars_kept)
+
+# Compute Spearman correlations
+suppressPackageStartupMessages(library(Hmisc))
+rc <- Hmisc::rcorr(as.matrix(corr_raw), type = "spearman")
+
+# rc$r is a full matrix; we subset rows = confounders, cols = third+outcomes
+r_mat <- rc$r
+
+r_sub <- r_mat[conf_kept, c(third_kept, outcome_kept), drop = FALSE]
+
+# Optional: rename for nicer labels in the heatmap
+row_labels <- dplyr::recode(
+  conf_kept,
+  hdi_undp                      = "HDI",
+  gdpPerCapita_tpt              = "GDP per capita (TPT)",
+  log1p_funding_per_100k_unocha = "Humanitarian funding (log1p, /100k)",
+  natural_hazard_inform         = "Natural hazard risk (INFORM)"
+)
+
+col_labels <- dplyr::recode(
+  c(third_kept, outcome_kept),
+  Total_tpt                           = "Third sector size (TPT)",
+  log1p_volunteers_staff_per_100k_ifrc_2024 = "RC volunteers+staff (log1p, /100k)",
+  log1p_income_per_100k_ifrc_2024           = "RC income (log1p, /100k)",
+  log1p_people_first_aid_per_100k_ifrc_2024 = "First‑aid trained (log1p, /100k)",
+  
+  coping_capacity_inform              = "INFORM Coping Capacity (%)",
+  readiness_ndgain                    = "ND‑GAIN Readiness (%)",
+  adaptive_capacity_ndgain            = "ND‑GAIN Adaptive Capacity (%)",
+  log1p_affected_per_100k_15_24_sum_owid =
+    "Affected by disasters (log1p, /100k)"
+)
+
+# Build a data frame suitable for heatmap plotting
+corr_rect_df <- as.data.frame(r_sub)
+rownames(corr_rect_df) <- row_labels
+names(corr_rect_df)    <- col_labels
+
+# Melt to long format
+long_rect <- reshape2::melt(
+  as.matrix(corr_rect_df),
+  varnames = c("Confounder", "Variable"),
+  value.name = "r"
+)
+
+# Plot rectangular heatmap: x = Variable (third+outcomes), y = Confounder
+p_rect <- ggplot(long_rect,
+                 aes(x = Variable, y = Confounder, fill = r)) +
+  geom_tile(color = "white", linewidth = 0.3) +
+  scale_fill_gradient2(
+    low = "#d73027", mid = "white", high = "#1a9850",
+    midpoint = 0, limits = c(-1, 1), name = "Spearman r"
+  ) +
+  labs(
+    title = "Correlations between confounders\nand third‑sector / outcome variables",
+    x = NULL, y = NULL
+  ) +
+  coord_equal() +
+  theme_minimal(base_family = "Times New Roman") +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size = 9),
+    axis.text.y = element_text(size = 9),
+    panel.grid  = element_blank(),
+    plot.title  = element_text(hjust = 0.5, face = "bold")
+  )
+
+ggsave(
+  here::here("outputs", "figures",
+             "corr_confounders_vs_thirdsector_outcomes_spearman.png"),
+  p_rect, width = 10, height = 4, dpi = 300
+)
 
 
 
