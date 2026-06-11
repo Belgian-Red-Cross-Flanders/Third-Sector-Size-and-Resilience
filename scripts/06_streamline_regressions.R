@@ -26,27 +26,23 @@ y_vars <- tibble::tibble(
 
 
 x_vars <- tibble::tibble(
-  xvar = c(
+  xvar  = c(
     "Total_tpt",
-    "log1p_volunteers_staff_per_100k_ifrc_2024",
-    "log1p_income_per_100k_ifrc_2024",
-    "log1p_people_first_aid_per_100k_ifrc_2024",
-    "volunteer_sp547_eurobar"
+    "Paid.staff_tpt",
+    "Volunteers_tpt"
+    
   ),
-  xlab = c(
+  xlab  = c(
     "TSS (%)",
-    "RCRC-VS (log1p, per 100k)",
-    "RCRC-E (log1p, per 100k, CHF)",
-    "RCRC-FA (log1p, per 100k)",
-    "EU-VOL (%)"
-  )
+    "Paid Staff (%)",
+    "Volunteers (%)"
+  ),
 )
 
 
 control_vars <- tibble::tibble(
   control = c(
     "log1p_funding_per_100k_unocha",
-    "log1p_gdpPerCapita_tpt",
     "natural_hazard_inform",
     "hdi_undp"
   )
@@ -152,7 +148,7 @@ reg_summary <- dplyr::bind_rows(reg_rows)
 
 out_csv <- here::here(
   "outputs", "regressions",
-  "summary_all_x_y_controls_hc3_disasters_mean.csv"
+  "summary_all_x_y_controls_hc3_tss_only.csv"
 )
 
 readr::write_csv(reg_summary, out_csv)

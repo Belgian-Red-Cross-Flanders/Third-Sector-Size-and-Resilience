@@ -1,47 +1,8 @@
 # 02_functions.R
-library(patchwork)
 
-
-# Functions
 
 only_numeric <- function(df) {
   df[, sapply(df, is.numeric), drop = FALSE]
-}
-
-save_corr_matrix <- function(df, outfile) {
-  # 1) Keep only numeric variables
-  num_df <- only_numeric(df)   # your helper: select(where(is.numeric))
-  
-  # 2) Drop numeric columns that are all NA
-  num_df <- num_df[, colSums(!is.na(num_df)) > 0, drop = FALSE]
-  
-  # 3) Need at least 2 numeric vars with some data
-  if (ncol(num_df) >= 2) {
-    
-    # psych::corr.test will handle NAs pairwise
-    cor_m <- psych::corr.test(
-      num_df,
-      use    = "pairwise",
-      method = "pearson"
-    )
-    
-    writexl::write_xlsx(
-      list(
-        "cor_matrix" = as.data.frame(cor_m$r),
-        "p_values"   = as.data.frame(cor_m$p),
-        "n_pairs"    = as.data.frame(cor_m$n)  # optional: Ns per pair
-      ),
-      outfile
-    )
-    
-    message("✓ Saved correlation matrix to: ", outfile)
-    
-  } else {
-    warning(
-      "Not enough numeric columns with data to compute correlations for: ",
-      outfile
-    )
-  }
 }
 
 #' Reads the excel file with manual country name corrections. This file should be located in the data_raw 
@@ -77,34 +38,6 @@ z_score <- function(x) {
 }
 
 
-#' Converts WVS ISO3 country codes into full country names using the
-#' predefined `wvs_country_lookup`. Unknown codes are returned unchanged.
-#'
-#' @param code_vec Character vector of ISO3 country codes.
-#'
-#' @return A character vector of country names.
-#'
-map_wvs_country <- function(code_vec) {
-  out <- wvs_country_lookup[code_vec]
-  out[is.na(out)] <- code_vec[is.na(out)]
-  return(out)
-}
-
-
-#' Converts ESS ISO2 country codes into full country names using the
-#' predefined `ess_country_lookup`. Unknown codes are returned unchanged.
-#'
-#' @param code_vec Character vector of ISO2 country codes.
-#'
-#' @return A character vector of country names.
-map_ess_country <- function(code_vec) {
-  out <- ess_country_lookup[code_vec]
-  out[is.na(out)] <- code_vec[is.na(out)]
-  return(out)
-}
-
-
-
 #' Add a suffix to variable names
 #'
 #' Appends a suffix to all columns except `Country`, useful when merging
@@ -120,97 +53,6 @@ suffix_vars <- function(df, suffix) {
       ~ ifelse(.x == "Country", .x, paste0(.x, "_", suffix))
     )
 }
-
-
-
-#' Plot an outcome variable against Third Sector Size
-#'
-#' Creates a scatter plot with linear fit and labels, annotating the Pearson
-#' correlation between Third Sector Size (%) and the chosen outcome variable.
-#'
-#' @param df A data frame containing:
-#'   - Third_sector_size_pct (fixed x-axis variable),
-#'   - Country (for labels),
-#'   - the column named in `yvar`.
-#' @param yvar String; column name in `df` to plot on the y-axis.
-#' @param ylab Y-axis label.
-#' @param title Plot title.
-#' @param outfile File path for the saved PNG.
-#' @param x_limits Optional numeric vector of length 2 for x-axis limits
-#'   (on Third Sector Size (%)).
-#'
-#' @return (Invisibly) the ggplot object.
-plot_outcome_vs_third_sector <- function(df, yvar, ylab, title, outfile,
-                                         x_limits = NULL) {
-  
-  # ---- Fixed X variable: Third Sector Size (%) ----
-  xvar_name <- "Total_tpt"
-  
-  # Extract vectors
-  x <- df[[xvar_name]]
-  y <- df[[yvar]]
-  
-  # Compute correlation
-  r <- cor(x, y, use = "complete.obs")
-  
-  # Base plot
-  p <- ggplot2::ggplot(
-    df,
-    aes(x = .data[[xvar_name]], y = .data[[yvar]])
-  ) +
-    geom_point(shape = 20) +
-    geom_smooth(method = "lm", se = FALSE, color = "red", linewidth = 0.6) +
-    
-    # Country labels
-    ggrepel::geom_text_repel(
-      aes(label = Country),
-      size = 2.5,
-      max.overlaps = 6,
-      family = "Times New Roman"
-    ) +
-    
-    # Correlation annotation
-    annotate(
-      "text",
-      x = if (!is.null(x_limits)) x_limits[2] * 0.9 else max(x, na.rm = TRUE) * 0.9,
-      y = max(y, na.rm = TRUE), # you can adjust this if you want it lower
-      label = paste0("Correlation: ", sprintf("%.2f", r)),
-      family = "Times New Roman",
-      size = 4,
-      hjust = 1
-    ) +
-    
-    # X axis limits (optional)
-    {
-      if (!is.null(x_limits)) {
-        ggplot2::scale_x_continuous(limits = x_limits)
-      } else {
-        ggplot2::scale_x_continuous()
-      }
-    } +
-    
-    # Titles & labels
-    ggplot2::labs(
-      title = title,
-      x = "Third Sector Size (%)",
-      y = ylab
-    ) +
-    
-    # Clean style
-    ggplot2::theme_bw() +
-    ggplot2::theme(
-      panel.border = ggplot2::element_blank(),
-      plot.title = ggplot2::element_text(hjust = 0.5, family = "Times New Roman"),
-      text = ggplot2::element_text(family = "Times New Roman")
-    )
-  
-  ggplot2::ggsave(outfile, plot = p, device = "png",
-                  width = 7.5, height = 5.2, dpi = 300)
-  
-  return(p)
-}
-
-
 
 
 # Pretty axis for variables that are already on the log1p scale.
@@ -324,7 +166,6 @@ make_log1p_pretty_scale <- function(
 
 
 
-# -------------------------------------------------------------------------------------------------------------------------------------
 plot_regression_third_sector <- function(df, xvar, xlab, yvar, ylab,
                                          title, outfile, outputs,
                                          x_limits = NULL, y_limits = NULL,
@@ -505,45 +346,7 @@ plot_regression_third_sector <- function(df, xvar, xlab, yvar, ylab,
       color = "red", linewidth = 0.6
     ) +
     
-    # # LABELS: constrain inside panel + improve legibility
-    # ggrepel::geom_label_repel(
-    #   data = df_labs,
-    #   ggplot2::aes(label = Country),
-    #   size = 2.2,
-    #   family = "Times New Roman",
-    #   
-    #   # readable but subtle
-    #   fill = scales::alpha("white", 0.80),
-    #   label.size = 0,
-    #   
-    #   # leader lines
-    #   min.segment.length = 0,
-    #   segment.size = 0.25,
-    #   segment.alpha = 0.6,
-    #   segment.color = "grey30",
-    #   
-    #   # stronger separation from points + between labels
-    #   box.padding = 0.40,
-    #   point.padding = 0.35,
-    #   force = 2.2,
-    #   force_pull = 0.4,
-    #   max.overlaps = Inf,
-    #   max.iter = 8000,
-    #   
-    #   # keep labels inside the panel
-    #   xlim = x_plot_limits,
-    #   ylim = y_plot_limits,
-    #   
-    #   # keep dense left clusters readable: stack vertically + nudge right
-    #   direction = "y",
-    #   nudge_x = nudge_right,
-    #   
-    #   seed = 123
-    # ) +
-    
-    # annotation: bottom-right corner INSIDE panel
-    
-    
+
     ggplot2::annotate(
       "label",
       x = x_plot_limits[2],
@@ -589,22 +392,6 @@ plot_regression_third_sector <- function(df, xvar, xlab, yvar, ylab,
 }
 
 
-# Pretty, evenly spaced log1p axis (Y)
-scale_y_log1p_nice <- function(y_log_values, n = 7, limits = NULL) {
-  y_log_min <- min(y_log_values, na.rm = TRUE)
-  y_log_max <- max(y_log_values, na.rm = TRUE)
-
-  break_vals <- seq(y_log_min, y_log_max, length.out = n)
-  label_vals <- expm1(break_vals)
-  label_fmt  <- scales::label_number(scale_cut = scales::cut_short_scale(), accuracy = 1)(label_vals)
-
-  ggplot2::scale_y_continuous(
-    limits = limits,
-    breaks = break_vals,
-    labels = label_fmt,
-    guide  = ggplot2::guide_axis(check.overlap = TRUE)
-  )
-}
 
 make_2x2_outcome_figure <- function(
     master, outcome_row, inputs
@@ -655,7 +442,83 @@ make_2x2_outcome_figure <- function(
     (plots[[3]] | plots[[4]])
 }
 
-##
+make_2x2_predictor_figure <- function(
+    master, inputs_row, outcomes
+) {
+  
+  `%>%` <- dplyr::`%>%`
+  
+  this_xvar <- inputs_row$xvar
+  xlab      <- inputs_row$xlab
+  
+  plots <- vector("list", 4)
+  
+  panel_labels <- c("A", "B", "C", "D")
+  
+  for (j in seq_len(nrow(outcomes))) {
+    
+    yvar <- outcomes$yvar[j]
+    ylab <- outcomes$ylab[j]
+    
+    df_model <- master %>%
+      dplyr::select(
+        Country,
+        xvar = .data[[this_xvar]],
+        yvar = .data[[yvar]]
+      ) %>%
+      dplyr::filter(!is.na(xvar), !is.na(yvar))
+    
+    
+    if (j %in% c(1, 2, 3)) {
+      y_limits <- c(0, 100)
+    } else {
+      y_limits <- range(df_model$yvar, na.rm = TRUE)
+    }
+    
+    model   <- lm(yvar ~ xvar, data = df_model)
+    outputs <- get_model_outputs_hc3_multivar(model)
+    
+    p <- plot_regression_third_sector(
+      df          = df_model,
+      xvar        = "xvar",
+      xlab        = xlab,
+      yvar        = "yvar",
+      ylab        = ylab,
+      title       = NULL,
+      outfile     = NULL,
+      outputs     = outputs,
+      y_limits    = y_limits,
+      show_y_axis = TRUE   # ✅ ALWAYS show y-axis
+    )
+    
+    # ✅ Remove x-axis title for top row (A, B)
+    if (j %in% c(1, 2)) {
+      p <- p +
+        ggplot2::theme(
+          axis.title.x = ggplot2::element_blank()
+        )
+    }
+    
+    # ✅ add panel label
+    plots[[j]] <- p +
+      ggplot2::ggtitle(panel_labels[j]) +
+      ggplot2::theme(
+        plot.title = ggplot2::element_text(
+          face = "bold",
+          size = 12,
+          hjust = 0
+        )
+      )
+  }
+  
+  fig <- (plots[[1]] | plots[[2]]) /
+    (plots[[3]] | plots[[4]])
+  
+  return(fig)
+}
+
+
+
 get_model_outputs_hc3 <- function(model) {
   # 1) HC3 robust covariance matrix
   vcov_hc3 <- sandwich::vcovHC(model, type = "HC3")
@@ -734,210 +597,6 @@ get_model_outputs_hc3 <- function(model) {
 }
 
 
-load_income_list <- function() {
-  income_sets <- list(
-    all = list(
-      levels = NULL,   # all income groups
-      label  = "All income groups",
-      suffix = "all"
-    ),
-    high = list(
-      levels = "High income",
-      label  = "High-income countries",
-      suffix = "high"
-    ),
-    upper_middle = list(
-      levels = "Upper-middle income",
-      label  = "Upper-middle-income countries",
-      suffix = "upper_middle"
-    ),
-    lower_middle = list(
-      levels = "Lower-middle income",
-      label  = "Lower-middle-income countries",
-      suffix = "lower_middle"
-    ),
-    low = list(
-      levels = "Low income",
-      label  = "Low-income countries",
-      suffix = "low"
-    ),
-    upper_high = list(
-      levels = c("Upper-middle income", "High income"),
-      label  = "High- & Upper-Middle-Income Countries",
-      suffix = "upper_high"
-    ),
-    lower_low = list(
-      levels = c("Low income", "Lower-middle income"),
-      label  = "Low- & Lower-Middle-Income Countries",
-      suffix = "low_lower"
-    )
-  )
-  
-  return(income_sets)
-}
-
-
-# -----------------------
-# Helper: compute model outputs (no saving)
-# -----------------------
-
-get_model_outputs <- function(model) {
-  
-  # 0. Model components
-  tdy <- broom::tidy(model, conf.int = TRUE)
-  gln <- broom::glance(model)
-  aug <- broom::augment(model)
-  
-  # Extract main effect (first non-intercept)
-  main_term <- tdy$term[tdy$term != "(Intercept)"][1]
-  main_row  <- tdy[tdy$term == main_term, ]
-  
-  main_est  <- main_row$estimate
-  main_p    <- main_row$p.value
-  main_ci_l <- main_row$conf.low
-  main_ci_u <- main_row$conf.high
-  r2        <- gln$r.squared
-  
-  # 1. Regression assumption tests
-  shapiro_p <- tryCatch(shapiro.test(residuals(model))$p.value,
-                        error = function(e) NA_real_)
-  dw        <- tryCatch(car::durbinWatsonTest(model), error = function(e) NA)
-  bp        <- tryCatch(lmtest::bptest(model),        error = function(e) NA)
-  
-  dw_stat <- ifelse(is.list(dw), dw$dw, NA_real_)
-  dw_p    <- ifelse(is.list(dw), dw$p,  NA_real_)
-  bp_stat <- ifelse(is.list(bp), as.numeric(bp$statistic), NA_real_)
-  bp_p    <- ifelse(is.list(bp), bp$p.value, NA_real_)
-  
-  # 2. Assumption Interpretation Logic
-  interp_normality <- if (is.na(shapiro_p)) {
-    "Normality test unavailable."
-  } else if (shapiro_p > 0.05) {
-    "Residuals appear normally distributed (Shapiro p > 0.05)."
-  } else {
-    "Residuals deviate from normality (Shapiro p < 0.05)."
-  }
-  
-  interp_dw <- if (is.na(dw_stat)) {
-    "Durbin–Watson test unavailable."
-  } else if (dw_stat > 1.5 & dw_stat < 2.5) {
-    paste0("Residuals show no evidence of autocorrelation (DW = ",
-           round(dw_stat, 3), ").")
-  } else {
-    paste0("Possible autocorrelation detected (DW = ",
-           round(dw_stat, 3), ").")
-  }
-  
-  interp_bp <- if (is.na(bp_p)) {
-    "Breusch–Pagan test unavailable."
-  } else if (bp_p > 0.05) {
-    "No evidence of heteroscedasticity (BP p > 0.05)."
-  } else {
-    "Heteroscedasticity detected (BP p < 0.05)."
-  }
-  
-  # 3. Automatic Plain‑Language Interpretation
-  effect_direction <- ifelse(main_est > 0, "increases", "decreases")
-  
-  effect_strength <- if (abs(main_est) < 0.5) {
-    "a very small effect"
-  } else if (abs(main_est) < 1.5) {
-    "a modest effect"
-  } else if (abs(main_est) < 3) {
-    "a strong effect"
-  } else {
-    "a very strong effect"
-  }
-  
-  auto_interpretation <- paste0(
-    "\n\n=== AUTOMATIC INTERPRETATION ===\n",
-    "Main predictor: ", main_term, "\n",
-    "Effect size: ", round(main_est, 3), " (",
-    effect_strength, ")\n",
-    "Interpretation: A one-unit increase in ", main_term, 
-    " is associated with a ",
-    abs(round(main_est, 3)), "-point change in the outcome.\n",
-    "Direction: The predictor ", effect_direction, " the outcome.\n",
-    "Significance: The effect is ",
-    if (main_p < 0.001) "highly statistically significant (p < 0.001)"
-    else if (main_p < 0.05) "statistically significant (p < 0.05)"
-    else "not statistically significant (p ≥ 0.05)", ".\n",
-    "R-squared: The model explains ", round(r2 * 100, 1),
-    "% of variance.\n\n",
-    "=== ASSUMPTION CHECKS ===\n",
-    "- Normality: ", interp_normality, "\n",
-    "- Independence: ", interp_dw, "\n",
-    "- Homoscedasticity: ", interp_bp, "\n",
-    "\n--------------------------------------------\n",
-    "If all assumptions are met: coefficients, SEs, ",
-    "and p-values are trustworthy.\n",
-    "If assumptions are violated: consider robust SEs, ",
-    "transformations, or alternative models.\n"
-  )
-  
-  # 4. Diagnostic Plots (not saved, just ggplot objects)
-  p1 <- ggplot2::ggplot(aug, ggplot2::aes(.fitted, .resid)) +
-    ggplot2::geom_point(shape = 20) +
-    ggplot2::geom_hline(yintercept = 0, color = "red", linewidth = 0.5) +
-    ggplot2::labs(
-      x = "Fitted values",
-      y = "Residuals",
-      title = "Residuals vs Fitted"
-    ) +
-    ggplot2::theme_bw() +
-    ggplot2::theme(
-      panel.border = ggplot2::element_blank(),
-      plot.title   = ggplot2::element_text(hjust = 0.5)
-    )
-  
-  qq_df <- data.frame(sample = residuals(model))
-  
-  p2 <- ggplot2::ggplot(qq_df, ggplot2::aes(sample = sample)) +
-    ggplot2::stat_qq(shape = 20) +
-    ggplot2::stat_qq_line(color = "red", linewidth = 0.5) +
-    ggplot2::labs(
-      title = "QQ plot of residuals"
-    ) +
-    ggplot2::theme_bw() +
-    ggplot2::theme(
-      panel.border = ggplot2::element_blank(),
-      plot.title   = ggplot2::element_text(hjust = 0.5)
-    )
-  
-  # 5. Collect diagnostics as a small data.frame
-  diag_df <- data.frame(
-    test      = c("Shapiro-Wilk (normality)",
-                  "Durbin-Watson (autocorrelation)",
-                  "Breusch-Pagan (heteroscedasticity)"),
-    statistic = c(NA,         dw_stat,  bp_stat),
-    p_value   = c(shapiro_p,  dw_p,     bp_p),
-    reference = c(
-      "> 0.05 desirable",
-      "≈ 2.0 indicates independence",
-      "> 0.05 desirable"
-    )
-  )
-  
-  # 6. Return everything as a list
-  list(
-    tidy        = tdy,
-    glance      = gln,
-    augment     = aug,
-    diagnostics = diag_df,
-    shapiro_p   = shapiro_p,
-    dw_stat     = dw_stat,
-    dw_p        = dw_p,
-    bp_stat     = bp_stat,
-    bp_p        = bp_p,
-    main_term   = main_term,
-    main_row    = main_row,
-    interpretation_text = auto_interpretation,
-    plot_resid  = p1,
-    plot_qq     = p2
-  )
-}
-
-
 get_model_outputs_hc3_multivar <- function(model) {
   
   # HC3 vcov
@@ -1002,75 +661,6 @@ get_model_outputs_hc3_multivar <- function(model) {
     bp_stat   = bp_stat,
     bp_p      = bp_p
   )
-}
-
-
-library(patchwork)
-
-make_4y_sharedx_figure <- function(master, outcomes, input) {
-  
-  this_xvar <- input$xvar[1]
-  xlab      <- input$xlab[1]
-  
-  plots <- vector("list", 4)
-  
-  # ---- compute shared x limits ONCE (important)
-  x_vals_all <- master[[this_xvar]]
-  x_range    <- range(x_vals_all, na.rm = TRUE)
-  x_pad      <- 0.10 * diff(x_range)
-  x_limits   <- c(x_range[1] - x_pad, x_range[2] + x_pad)
-  
-  for (i in seq_len(nrow(outcomes))) {
-    
-    yvar  <- outcomes$yvar[i]
-    ylab  <- outcomes$ylab[i]
-    
-    df_model <- master %>%
-      dplyr::select(
-        Country,
-        xvar = .data[[this_xvar]],
-        dplyr::all_of(yvar)
-      ) %>%
-      dplyr::filter(!is.na(xvar), !is.na(.data[[yvar]]))
-    
-    # skip tiny samples defensively
-    if (nrow(df_model) < 10) {
-      plots[[i]] <- ggplot() + theme_void()
-      next
-    }
-    
-    model   <- stats::lm(stats::as.formula(paste0(yvar, " ~ xvar")), data = df_model)
-    outputs <- get_model_outputs_hc3_multivar(model)
-    
-    plots[[i]] <- plot_regression_third_sector(
-      df          = df_model,
-      xvar        = "xvar",
-      xlab        = xlab,
-      yvar        = yvar,
-      ylab        = ylab,
-      title       = NULL,
-      outfile     = NULL,          # do NOT save individual panels
-      outputs     = outputs,
-      x_limits    = x_limits,
-      show_y_axis = TRUE           # all panels keep y labels
-    )
-  }
-  
-  # ---- remove x-axis text & ticks from top row
-  plots[[1]] <- plots[[1]] + theme(axis.title.x = element_blank(),
-                                   axis.text.x  = element_blank(),
-                                   axis.ticks.x = element_blank())
-  
-  plots[[2]] <- plots[[2]] + theme(axis.title.x = element_blank(),
-                                   axis.text.x  = element_blank(),
-                                   axis.ticks.x = element_blank())
-  
-  # ---- assemble 2x2 with shared x visually aligned
-  fig <- (plots[[1]] | plots[[2]]) /
-    (plots[[3]] | plots[[4]]) +
-    plot_layout(guides = "collect")
-  
-  fig
 }
 
 

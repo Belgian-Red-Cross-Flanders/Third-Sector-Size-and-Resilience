@@ -33,20 +33,17 @@ writexl::write_xlsx(missing_tbl, here::here("outputs", "descriptives", "01_missi
 num_df <- only_numeric(master)
 desc_global <- psych::describe(num_df)
 desc_global$variable <- rownames(desc_global); rownames(desc_global) <- NULL
-writexl::write_xlsx(desc_global, here::here("outputs", "descriptives", "02_describe_global_numeric.xlsx"))
+writexl::write_xlsx(desc_global, here::here("outputs", "descriptives", "02_describe_global_numeric_tss.xlsx"))
 
 
 
 # 4) Correlations among third-sector lenses (GLOBAL, all countries) ----------
-# Variables you want to compare among each other (third-sector lenses)
+# Variables you want to compare among each other (third-sector lenses).
 third_sector_vars <- c(
   "Total_tpt",
-  "volunteers_per_100k_ifrc_2024",
-  "staff_per_100k_ifrc_2024",
-  "volunteers_staff_per_100k_ifrc_2024",
-  "income_per_100k_ifrc_2024",
-  "people_first_aid_per_100k_ifrc_2024",
-  "volunteer_sp547_eurobar"     
+  "Paid.staff_tpt",
+  "Volunteers_tpt",
+  "volunteer_sp547_eurobar"
 )
 
 # Keep only variables that exist and are numeric
@@ -65,12 +62,9 @@ third_df <- third_df[, enough_data, drop = FALSE]
 short_names <- tibble::tibble(
   old = names(third_df),
   new = dplyr::recode(old,
-                      Total_tpt = "Third sector size (TPT)",
-                      volunteers_per_100k_ifrc_2024 = "RC volunteers /100k",
-                      staff_per_100k_ifrc_2024 = "RC staff /100k",
-                      volunteers_staff_per_100k_ifrc_2024 = "RC vol+staff /100k",
-                      income_per_100k_ifrc_2024 = "RC income /100k",
-                      people_first_aid_per_100k_ifrc_2024 = "First-aid trained /100k",
+                      Total_tpt = "Third sector size (TSS)",
+                      Staff_tpt = "TSS-S",
+                      Volunteers_tpt = "TSS-V",
                       volunteer_sp547_eurobar = "Eurobarometer: volunteering (%)"
   )
 )
@@ -104,61 +98,8 @@ spear <- Hmisc::rcorr(as.matrix(third_df), type = "spearman")
 
 spear_tidy <- tidy_rcorr(spear)
 
-# Also save the wide correlation matrices for convenience
-spear_mat <- as.data.frame(spear$r); spear_mat$variable <- rownames(spear_mat); rownames(spear_mat) <- NULL
 
-# # Write a single Excel file with multiple sheets
-# writexl::write_xlsx(
-#   list(
-#     "Spearman_matrix"  = spear_mat,
-#     "Spearman_long"    = spear_tidy
-#   ),
-#   here::here("outputs", "descriptives", "03_correlations_third_sector_global.xlsx")
-# )
-
-# 5) Heatmap Spearman ----------------------------------------
-suppressPackageStartupMessages(library(ggplot2))
-
-# Function to build a heatmap from correlation matrix
-plot_corr_heatmap <- function(cor_mat_df, title, file_out) {
-  # cor_mat_df is a data.frame with columns = variables; last column called "variable"
-  mat <- cor_mat_df
-  rownames(mat) <- mat$variable
-  mat$variable <- NULL
-  
-  # Long format
-  long <- reshape2::melt(as.matrix(mat), varnames = c("var1","var2"), value.name = "r")
-  
-  p <- ggplot(long, aes(x = var1, y = var2, fill = r)) +
-    geom_tile(color = "white", linewidth = 0.3) +
-    scale_fill_gradient2(
-      low = "#d73027", mid = "white", high = "#1a9850",
-      midpoint = 0, limits = c(-1, 1), name = "r"
-    ) +
-    coord_equal() +
-    labs(title = title, x = NULL, y = NULL) +
-    theme_minimal(base_family = "Times New Roman") +
-    theme(
-      axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size = 9),
-      axis.text.y = element_text(size = 9),
-      panel.grid = element_blank(),
-      plot.title = element_text(hjust = 0.5, face = "bold")
-    )
-  
-  ggsave(file_out, p, width = 10, height = 9, dpi = 300)
-  invisible(p)
-}
-
-
-plot_corr_heatmap(
-  spear_mat,
-  title   = "Third‑Sector Lenses (Global): Spearman correlations",
-  file_out = here::here("outputs","figures","corr_third_sector_global_spearman.png")
-)
-
-# ---------------------------------------
-
-# 6) Correlations: confounders vs third sector + outcomes ---------------------
+# 5) Correlations: confounders vs third sector + outcomes ---------------------
 
 third_sector_vars <- c(
   "Total_tpt",

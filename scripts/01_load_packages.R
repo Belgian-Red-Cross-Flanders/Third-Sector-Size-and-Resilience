@@ -20,10 +20,10 @@ required_pkgs <- c(
   writexl   = "1.5.4",
   rmarkdown = "2.30",
   stringr   = "1.6.0",
-  sandwich  = "3.1.1"
+  sandwich  = "3.1.1",
+  patchwork = "1.3.2"
   
 )
-
 
 ensure_version <- function(pkg, ver) {
   is_installed <- requireNamespace(pkg, quietly = TRUE)

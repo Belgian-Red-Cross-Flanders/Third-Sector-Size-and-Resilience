@@ -24,6 +24,8 @@ raw <- readRDS(here::here("data_clean", "raw_data.rds"))
 tpt <- raw$third_raw %>%
   dplyr::select(
     Country,
+    Paid.staff,
+    Volunteers,
     Total,
     gdpPerCapita,
     World.Bank.Income.Group
@@ -33,6 +35,8 @@ tpt <- raw$third_raw %>%
     Country = standardize_country(Country, corrections),
     
     # convert numeric-like columns properly
+    Paid.staff = as.numeric(as.character(Paid.staff)),
+    Volunteers = as.numeric(as.character(Volunteers)),
     Total = as.numeric(as.character(Total)),
     gdpPerCapita = as.numeric(as.character(gdpPerCapita)),
     log1p_gdpPerCapita = log1p(gdpPerCapita)
