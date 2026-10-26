@@ -9,7 +9,7 @@ source(here::here("scripts", "02_functions.R"))
 
 
 # 0) Load data ---------------------------------------------------------------
-master <- readRDS(here::here("data_clean", "master_dataset.rds"))
+master <- readRDS(here::here("data_clean", "v2_master_dataset_common.rds"))
 dir.create(here::here("outputs", "descriptives"), recursive = TRUE, showWarnings = FALSE)
 dir.create(here::here("outputs", "figures"),      recursive = TRUE, showWarnings = FALSE)
 
@@ -33,7 +33,7 @@ writexl::write_xlsx(missing_tbl, here::here("outputs", "descriptives", "01_missi
 num_df <- only_numeric(master)
 desc_global <- psych::describe(num_df)
 desc_global$variable <- rownames(desc_global); rownames(desc_global) <- NULL
-writexl::write_xlsx(desc_global, here::here("outputs", "descriptives", "02_describe_global_numeric_tss.xlsx"))
+writexl::write_xlsx(desc_global, here::here("outputs", "descriptives", "02_describe_global_numeric.xlsx"))
 
 
 

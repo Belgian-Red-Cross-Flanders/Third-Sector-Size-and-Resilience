@@ -144,95 +144,6 @@ owid <- raw$owid_raw %>%
   ) %>%
   suffix_vars("owid")
  
-    
-
-# -----------------------
-# CLEAN IFRC / RED CROSS PEOPLE DATA (2024)
-# -----------------------
-
-ifrc_nat <- raw$ifrc_nat_raw %>%
-  # Standardize country names
-  dplyr::mutate(
-    Country = standardize_country(Country, corrections)
-  ) %>%
-  
-  # First Aid training
-  dplyr::left_join(
-    raw$ifrc_firstaid %>%
-      dplyr::select(
-        NationalSociety,
-        people_first_aid = `People.trained.in.First.Aid`
-      ),
-    by = "NationalSociety"
-  ) %>%
-  # Income
-  dplyr::left_join(
-    raw$ifrc_income %>%
-      dplyr::select(
-        NationalSociety,
-        income = `Income`
-      ),
-    by = "NationalSociety"
-  ) %>%
-
-  # Convert numeric-like columns to numeric (defensive)
-  dplyr::mutate(
-    dplyr::across(
-      c(
-        Volunteers, Staff,
-        people_first_aid,
-        income
-      ),
-      ~ as.numeric(.)
-    )
-  ) %>%
-  
-  # Merge with population and create per‑100k indicators
-  dplyr::left_join(pop, by = "Country") %>% 
-  dplyr::mutate(
-    volunteers_staff_total = Volunteers + Staff,  
-
-    volunteers_per_100k = ifelse(
-      !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
-      Volunteers / population_2024_pop_wb * 1e5,
-      NA_real_
-    ),
-    staff_per_100k = ifelse(
-      !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
-      Staff / population_2024_pop_wb * 1e5,
-      NA_real_
-    ),
-    volunteers_staff_per_100k = ifelse(          
-      !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
-      volunteers_staff_total / population_2024_pop_wb * 1e5,
-      NA_real_
-    ),
-
-    income_per_100k = ifelse(
-      !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
-      income / population_2024_pop_wb * 1e5,
-      NA_real_
-    ),
-    
-    people_first_aid_per_100k = ifelse(
-      !is.na(population_2024_pop_wb) & population_2024_pop_wb > 0,
-      people_first_aid / population_2024_pop_wb * 1e5,
-      NA_real_
-    ),
-    
-
-    log1p_income_per_100k = log1p(income_per_100k),
-    log1p_volunteers_staff_per_100k = log1p(volunteers_staff_per_100k),
-    log1p_people_first_aid_per_100k = log1p(people_first_aid_per_100k)
-    
-  ) %>%
-  
-  # Drop helper population column (already in master from pop)
-  dplyr::select(-population_2024_pop_wb) %>%
-  
-  # Suffix IFRC variables so they don't clash with others (Country stays as Country)
-  suffix_vars("ifrc_2024")
-
 
 # -----------------------
 # CLEAN HUMANITARIAN AID FUNDING DATA (UN-OCHA) (2024)
@@ -312,7 +223,6 @@ master <- tpt %>%                     # <— anchor dataset
   dplyr::left_join(unocha_fund, by = "Country") %>%
   dplyr::left_join(inform,    by = "Country") %>%
   dplyr::left_join(ndgain,    by = "Country") %>%
-  dplyr::left_join(ifrc_nat,  by = "Country") %>%
   dplyr::left_join(eurobarometer,by = "Country") %>%
   dplyr::left_join(owid,      by = "Country") %>%
   dplyr::left_join(hdi,      by = "Country")
@@ -326,7 +236,6 @@ diag_list <- list(
   inform      = inform$Country,
   ndgain      = ndgain$Country,
   pop         = pop$Country,
-  ifrc_nat    = ifrc_nat$Country,
   unocha_fund = unocha_fund$Country,
   owid        = owid$Country,
   eurobarometer = eurobarometer$Country,
@@ -368,8 +277,8 @@ if (length(extra) > 0) {
 # SAVE OUTPUT
 # -----------------------
 
-saveRDS(master, here::here("data_clean", "master_dataset.rds"))
-writexl::write_xlsx(master, here::here("data_clean", "master_dataset.xlsx"))
+saveRDS(master, here::here("data_clean", "v2_master_dataset.rds"))
+writexl::write_xlsx(master, here::here("data_clean", "v2_master_dataset.xlsx"))
 
 cat("\nMaster dataset created successfully.")
 

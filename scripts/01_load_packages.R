@@ -21,7 +21,8 @@ required_pkgs <- c(
   rmarkdown = "2.30",
   stringr   = "1.6.0",
   sandwich  = "3.1.1",
-  patchwork = "1.3.2"
+  patchwork = "1.3.2",
+  rsq       = "2.7"
   
 )
 
