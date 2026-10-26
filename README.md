@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 # Third Sector Size and Resilience
 
 This repository contains the data preparation, analysis, and
@@ -11,9 +5,7 @@ figure‑generation pipeline for a research project examining the
 relationship between third sector capacity and national resilience
 outcomes, including readiness, adaptive capacity, coping capacity, and
 disaster impacts. The project uses cross‑national data and focuses on
-multiple dimensions of third sector capacity, including structural size,
-Red Cross and Red Crescent organizational resources, training, and
-volunteer intensity.
+multiple dimensions of third sector (paid employment and volunteers, adding to the total size).
 
 ## Project structure
 
@@ -29,9 +21,14 @@ The repository is organized as follows:
 │   ├── 05_descriptives.R
 │   ├── 06_streamline_regressions.R
 │   ├── 07_eurobarometer_analysis.R
-│   ├── 08_four_plots.R
+│   ├── 08_four_plots_outcomes.R
+│   ├── 08_four_plots_outcomes.R
 │   ├── 09_descriptives_figures.R
-│   └── 10_eu_plots.R
+│   ├── 10_eu_plots.R
+│   ├── 11_v2_regression_tables.R
+│   ├── 12_v2_joint_tss_models.R
+│   ├── v2_LOO_analysis.R
+│   └── 13_v2_replication_thirdpillar_observed.R
 │
 ├── data_raw/
 │   └── Raw data from all original sources (not modified)
@@ -54,9 +51,6 @@ The analysis draws on multiple international data sources, including:
     Vandekerckhove, P. (2024). Measuring the Size of the “Third Pillar”:
     A Global Dataset. The World Bank Economic Review, 38(4), 861-873.
     <https://doi.org/10.1093/wber/lhae012> )
-
--   RCRC indicators (organizational resources, training, volunteer/staff
-    density) (FDRS dataset)
 
 -   ND‑GAIN Index (Readiness and Adaptive Capacity)
 
@@ -106,8 +100,7 @@ analyses.
 
 ### 05_descriptives.R 
 
-Produces global descriptive statistics, missingness checks, and
-correlation analyses (e.g. Spearman correlations).
+Produces global descriptive statistics and missingness checks
 
 ### 06_streamline_regressions.R 
 
@@ -115,7 +108,7 @@ Runs all regression models reported in the paper, including:
 
 -   Bivariate models
 
--   Models with controls (hazard exposure, humanitarian aid, GDP, HDI)
+-   Models with controls (hazard exposure, humanitarian aid, GDP, HDI - added one by one and then in sets)
 
 -   Robust standard errors
 
@@ -127,9 +120,9 @@ Exploratory analysis of the Eurobarometer survey data for the EU
 subsample, focusing on disaster‑response volunteering, trust, and
 preparedness‑related attitudes.
 
-### 08_four_plots.R 
+### 08_four_plots_outcomes/predictors.R 
 
-Generates the main regression plots used in the manuscript.
+Generates the main regression plots used in the manuscript, either for common outcomes or common predictors
 
 ### 09_descriptives_figures.R 
 
@@ -138,6 +131,22 @@ Creates descriptive figures (distributions, correlations, summaries).
 ### 10_eu_plots.R 
 
 Produces figures specific to the EU volunteering analysis.
+
+### 11_v2_regression_tables.R 
+
+Makes the regression tables for the manuscript.
+
+### 12_v2_joint_tss_models.R 
+
+Joint TSS-P and TSS-V model to assess the influence of each TSS part.
+
+### 13_v2_replication_thirdpillar_observed.R 
+
+Attempt on replicating the third pillar dataset to get the observed data only in a robustness check in which we don't include the model-based estimates of TSS and its parts.
+
+### v2_LOO_analysis.R 
+
+Leave-one-out analysis to assess if there are countries biasing the results.
 
 ## Outputs
 

@@ -1,0 +1,289 @@
+sample_type,ylab,xlab,n_controls,control,beta,se_hc3,p_value_hc3,partial_r2,r2_adjusted,n,shapiro_p,durbin_watson_stat,breusch_pagan_p
+available,INFORM Coping Capacity (%),TSS observed,0,None (bivariate),1.534287947,0.386262503,2.98E-04,0.272959171,0.254317098,41,0.334771125,1.92024213,0.412620943
+available,INFORM Coping Capacity (%),TSS observed,1,log1p_funding_per_100k_unocha,1.467180376,0.374965418,3.65E-04,0.221225236,0.237278622,41,0.275133523,1.869638747,0.357449773
+available,INFORM Coping Capacity (%),TSS observed,1,natural_hazard_inform,1.379674996,0.416527316,0.002037439,0.234784053,0.28459652,41,0.241963816,1.887443945,0.884631135
+available,INFORM Coping Capacity (%),TSS observed,1,hdi_undp,-0.096436545,0.356839555,0.788428907,0.002212269,0.698744103,41,0.189215079,1.664853878,0.904418945
+available,INFORM Coping Capacity (%),TSS observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,1.2050349,0.345110302,0.001260014,0.157168307,0.278263887,41,0.346412593,1.732270052,0.945500481
+available,INFORM Coping Capacity (%),TSS observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.083289299,0.346659721,0.811453074,0.001519057,0.690747615,41,0.197646548,1.694416073,0.979962516
+available,INFORM Coping Capacity (%),TSS observed,2,natural_hazard_inform + hdi_undp,-0.163774862,0.366689224,0.65774464,0.006556409,0.706424076,41,0.158501751,1.678367157,0.79485734
+available,INFORM Coping Capacity (%),TSS observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-0.106199833,0.355765079,0.767029389,0.002625837,0.701939957,41,0.125720604,1.826052451,0.812248837
+common,INFORM Coping Capacity (%),TSS observed,0,None (bivariate),1.534287947,0.386262503,2.98E-04,0.272959171,0.254317098,41,0.334771125,1.92024213,0.412620943
+common,INFORM Coping Capacity (%),TSS observed,1,log1p_funding_per_100k_unocha,1.467180376,0.374965418,3.65E-04,0.221225236,0.237278622,41,0.275133523,1.869638747,0.357449773
+common,INFORM Coping Capacity (%),TSS observed,1,natural_hazard_inform,1.379674996,0.416527316,0.002037439,0.234784053,0.28459652,41,0.241963816,1.887443945,0.884631135
+common,INFORM Coping Capacity (%),TSS observed,1,hdi_undp,-0.096436545,0.356839555,0.788428907,0.002212269,0.698744103,41,0.189215079,1.664853878,0.904418945
+common,INFORM Coping Capacity (%),TSS observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,1.2050349,0.345110302,0.001260014,0.157168307,0.278263887,41,0.346412593,1.732270052,0.945500481
+common,INFORM Coping Capacity (%),TSS observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.083289299,0.346659721,0.811453074,0.001519057,0.690747615,41,0.197646548,1.694416073,0.979962516
+common,INFORM Coping Capacity (%),TSS observed,2,natural_hazard_inform + hdi_undp,-0.163774862,0.366689224,0.65774464,0.006556409,0.706424076,41,0.158501751,1.678367157,0.79485734
+common,INFORM Coping Capacity (%),TSS observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-0.106199833,0.355765079,0.767029389,0.002625837,0.701939957,41,0.125720604,1.826052451,0.812248837
+available,ND-GAIN Readiness (%),TSS observed,0,None (bivariate),1.85925965,0.333084493,1.97E-06,0.408408156,0.393239134,41,0.078419847,2.105978488,0.947437313
+available,ND-GAIN Readiness (%),TSS observed,1,log1p_funding_per_100k_unocha,1.787254535,0.363652554,1.73E-05,0.345816454,0.380303776,41,0.052778909,2.060140089,0.526854582
+available,ND-GAIN Readiness (%),TSS observed,1,natural_hazard_inform,1.632541448,0.333073502,1.81E-05,0.378857992,0.486600668,41,0.844808274,2.064001672,0.65965731
+available,ND-GAIN Readiness (%),TSS observed,1,hdi_undp,0.408244523,0.254372636,0.116794136,0.046804937,0.75162194,41,0.370532032,1.531692416,0.503221535
+available,ND-GAIN Readiness (%),TSS observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,1.408593603,0.30545187,4.65E-05,0.270432279,0.494510447,41,0.542487046,1.83368595,0.743474076
+available,ND-GAIN Readiness (%),TSS observed,2,log1p_funding_per_100k_unocha + hdi_undp,0.409614326,0.281439794,0.153984613,0.043476338,0.744910629,41,0.370695395,1.534186263,0.686379479
+available,ND-GAIN Readiness (%),TSS observed,2,natural_hazard_inform + hdi_undp,0.428334833,0.266113796,0.115986974,0.050544663,0.746343984,41,0.345779325,1.536165613,0.578825234
+available,ND-GAIN Readiness (%),TSS observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,0.416150711,0.286570565,0.15511336,0.04500227,0.739465481,41,0.378275804,1.508268528,0.702856507
+common,ND-GAIN Readiness (%),TSS observed,0,None (bivariate),1.85925965,0.333084493,1.97E-06,0.408408156,0.393239134,41,0.078419847,2.105978488,0.947437313
+common,ND-GAIN Readiness (%),TSS observed,1,log1p_funding_per_100k_unocha,1.787254535,0.363652554,1.73E-05,0.345816454,0.380303776,41,0.052778909,2.060140089,0.526854582
+common,ND-GAIN Readiness (%),TSS observed,1,natural_hazard_inform,1.632541448,0.333073502,1.81E-05,0.378857992,0.486600668,41,0.844808274,2.064001672,0.65965731
+common,ND-GAIN Readiness (%),TSS observed,1,hdi_undp,0.408244523,0.254372636,0.116794136,0.046804937,0.75162194,41,0.370532032,1.531692416,0.503221535
+common,ND-GAIN Readiness (%),TSS observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,1.408593603,0.30545187,4.65E-05,0.270432279,0.494510447,41,0.542487046,1.83368595,0.743474076
+common,ND-GAIN Readiness (%),TSS observed,2,log1p_funding_per_100k_unocha + hdi_undp,0.409614326,0.281439794,0.153984613,0.043476338,0.744910629,41,0.370695395,1.534186263,0.686379479
+common,ND-GAIN Readiness (%),TSS observed,2,natural_hazard_inform + hdi_undp,0.428334833,0.266113796,0.115986974,0.050544663,0.746343984,41,0.345779325,1.536165613,0.578825234
+common,ND-GAIN Readiness (%),TSS observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,0.416150711,0.286570565,0.15511336,0.04500227,0.739465481,41,0.378275804,1.508268528,0.702856507
+available,ND-GAIN Adaptive Capacity (%),TSS observed,0,None (bivariate),1.818664254,0.286475682,1.70E-07,0.474157363,0.460674219,41,0.704496765,2.144593026,0.269028432
+available,ND-GAIN Adaptive Capacity (%),TSS observed,1,log1p_funding_per_100k_unocha,1.588727349,0.325513358,1.93E-05,0.378379835,0.483998403,41,0.279129483,2.052139978,0.60429483
+available,ND-GAIN Adaptive Capacity (%),TSS observed,1,natural_hazard_inform,1.710499242,0.2994774,1.42E-06,0.443535685,0.476676712,41,0.342370488,2.162476814,0.773952605
+available,ND-GAIN Adaptive Capacity (%),TSS observed,1,hdi_undp,0.588377226,0.276911735,0.040167628,0.119280594,0.773031817,41,0.560016848,2.169700759,0.385034405
+available,ND-GAIN Adaptive Capacity (%),TSS observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,1.365555333,0.29490173,4.39E-05,0.310382329,0.525248007,41,0.171358967,1.959664001,0.943888174
+available,ND-GAIN Adaptive Capacity (%),TSS observed,2,log1p_funding_per_100k_unocha + hdi_undp,0.447640523,0.298403327,0.142069125,0.073280836,0.787519556,41,0.789098227,2.002773658,0.269640115
+available,ND-GAIN Adaptive Capacity (%),TSS observed,2,natural_hazard_inform + hdi_undp,0.529962128,0.269865676,0.057100558,0.103023469,0.781617997,41,0.713029969,2.142455652,0.710453179
+available,ND-GAIN Adaptive Capacity (%),TSS observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,0.43636003,0.291734735,0.143436599,0.071576679,0.787546636,41,0.871006965,2.042635509,0.695789477
+common,ND-GAIN Adaptive Capacity (%),TSS observed,0,None (bivariate),1.818664254,0.286475682,1.70E-07,0.474157363,0.460674219,41,0.704496765,2.144593026,0.269028432
+common,ND-GAIN Adaptive Capacity (%),TSS observed,1,log1p_funding_per_100k_unocha,1.588727349,0.325513358,1.93E-05,0.378379835,0.483998403,41,0.279129483,2.052139978,0.60429483
+common,ND-GAIN Adaptive Capacity (%),TSS observed,1,natural_hazard_inform,1.710499242,0.2994774,1.42E-06,0.443535685,0.476676712,41,0.342370488,2.162476814,0.773952605
+common,ND-GAIN Adaptive Capacity (%),TSS observed,1,hdi_undp,0.588377226,0.276911735,0.040167628,0.119280594,0.773031817,41,0.560016848,2.169700759,0.385034405
+common,ND-GAIN Adaptive Capacity (%),TSS observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,1.365555333,0.29490173,4.39E-05,0.310382329,0.525248007,41,0.171358967,1.959664001,0.943888174
+common,ND-GAIN Adaptive Capacity (%),TSS observed,2,log1p_funding_per_100k_unocha + hdi_undp,0.447640523,0.298403327,0.142069125,0.073280836,0.787519556,41,0.789098227,2.002773658,0.269640115
+common,ND-GAIN Adaptive Capacity (%),TSS observed,2,natural_hazard_inform + hdi_undp,0.529962128,0.269865676,0.057100558,0.103023469,0.781617997,41,0.713029969,2.142455652,0.710453179
+common,ND-GAIN Adaptive Capacity (%),TSS observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,0.43636003,0.291734735,0.143436599,0.071576679,0.787546636,41,0.871006965,2.042635509,0.695789477
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS observed,0,None (bivariate),-0.223666409,0.088148301,0.015278582,0.134133586,0.111931884,41,0.243832954,1.851204264,0.111013096
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS observed,1,log1p_funding_per_100k_unocha,-0.251287265,0.114691504,0.034656003,0.140196792,0.09868686,41,0.181961978,1.818116075,0.154807797
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS observed,1,natural_hazard_inform,-0.153905578,0.096717055,0.119828658,0.085387802,0.323474799,41,0.490728512,1.680262951,0.367484683
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS observed,1,hdi_undp,-0.011360556,0.122164247,0.926396809,2.94E-04,0.270439519,41,0.192192903,1.888500592,0.293891533
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,-0.145594507,0.120643718,0.235163101,0.061428869,0.305871273,41,0.543640882,1.678170297,0.382277793
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.043620092,0.138066591,0.753827078,0.004076475,0.270986881,41,0.193570728,1.831648576,0.269755781
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS observed,2,natural_hazard_inform + hdi_undp,-0.047138687,0.119447887,0.695375709,0.005712651,0.354003735,41,0.369335079,1.737857816,0.604073757
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-0.053576053,0.134751322,0.693278737,0.006918461,0.337120496,41,0.308377167,1.738647731,0.686963133
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS observed,0,None (bivariate),-0.223666409,0.088148301,0.015278582,0.134133586,0.111931884,41,0.243832954,1.851204264,0.111013096
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS observed,1,log1p_funding_per_100k_unocha,-0.251287265,0.114691504,0.034656003,0.140196792,0.09868686,41,0.181961978,1.818116075,0.154807797
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS observed,1,natural_hazard_inform,-0.153905578,0.096717055,0.119828658,0.085387802,0.323474799,41,0.490728512,1.680262951,0.367484683
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS observed,1,hdi_undp,-0.011360556,0.122164247,0.926396809,2.94E-04,0.270439519,41,0.192192903,1.888500592,0.293891533
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,-0.145594507,0.120643718,0.235163101,0.061428869,0.305871273,41,0.543640882,1.678170297,0.382277793
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.043620092,0.138066591,0.753827078,0.004076475,0.270986881,41,0.193570728,1.831648576,0.269755781
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS observed,2,natural_hazard_inform + hdi_undp,-0.047138687,0.119447887,0.695375709,0.005712651,0.354003735,41,0.369335079,1.737857816,0.604073757
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-0.053576053,0.134751322,0.693278737,0.006918461,0.337120496,41,0.308377167,1.738647731,0.686963133
+available,Reliance on non-profits in first days of crisis (%),TSS observed,0,None (bivariate),0.845534027,0.320363327,0.016661307,0.136083909,0.088088571,20,0.020655995,2.133535253,0.66510065
+available,Reliance on non-profits in first days of crisis (%),TSS observed,1,log1p_funding_per_100k_unocha,0.16297632,0.33657473,0.634408777,0.004823898,0.228445437,20,0.003662829,2.154135727,0.673976937
+available,Reliance on non-profits in first days of crisis (%),TSS observed,1,natural_hazard_inform,0.474109926,0.371167713,0.21864994,0.054632809,0.265711247,20,0.005399239,1.934409468,0.605901428
+available,Reliance on non-profits in first days of crisis (%),TSS observed,1,hdi_undp,0.399472318,0.560892571,0.485996336,0.012313596,0.056875445,20,0.041668821,2.06796579,0.693143932
+available,Reliance on non-profits in first days of crisis (%),TSS observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,0.120842844,0.649585354,0.854758736,0.003071589,0.292604355,20,0.019356767,2.002782082,0.292273521
+available,Reliance on non-profits in first days of crisis (%),TSS observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.3563822,0.414033435,0.402086825,0.01030788,0.210976655,20,0.008851303,2.094412586,0.716523827
+available,Reliance on non-profits in first days of crisis (%),TSS observed,2,natural_hazard_inform + hdi_undp,-1.312431137,1.011457377,0.212833932,0.13730603,0.441558546,20,0.526054009,1.482219864,0.082303285
+available,Reliance on non-profits in first days of crisis (%),TSS observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-1.39899077,1.071764791,0.211453786,0.158627711,0.435971152,20,0.500030352,1.602202566,0.143162693
+common,Reliance on non-profits in first days of crisis (%),TSS observed,0,None (bivariate),0.845534027,0.320363327,0.016661307,0.136083909,0.088088571,20,0.020655995,2.133535253,0.66510065
+common,Reliance on non-profits in first days of crisis (%),TSS observed,1,log1p_funding_per_100k_unocha,0.16297632,0.33657473,0.634408777,0.004823898,0.228445437,20,0.003662829,2.154135727,0.673976937
+common,Reliance on non-profits in first days of crisis (%),TSS observed,1,natural_hazard_inform,0.474109926,0.371167713,0.21864994,0.054632809,0.265711247,20,0.005399239,1.934409468,0.605901428
+common,Reliance on non-profits in first days of crisis (%),TSS observed,1,hdi_undp,0.399472318,0.560892571,0.485996336,0.012313596,0.056875445,20,0.041668821,2.06796579,0.693143932
+common,Reliance on non-profits in first days of crisis (%),TSS observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,0.120842844,0.649585354,0.854758736,0.003071589,0.292604355,20,0.019356767,2.002782082,0.292273521
+common,Reliance on non-profits in first days of crisis (%),TSS observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.3563822,0.414033435,0.402086825,0.01030788,0.210976655,20,0.008851303,2.094412586,0.716523827
+common,Reliance on non-profits in first days of crisis (%),TSS observed,2,natural_hazard_inform + hdi_undp,-1.312431137,1.011457377,0.212833932,0.13730603,0.441558546,20,0.526054009,1.482219864,0.082303285
+common,Reliance on non-profits in first days of crisis (%),TSS observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-1.39899077,1.071764791,0.211453786,0.158627711,0.435971152,20,0.500030352,1.602202566,0.143162693
+available,Trust in emergency services and authorities (%),TSS observed,0,None (bivariate),0.58138565,0.374188333,0.137655952,0.144445719,0.096914926,20,0.372776625,1.979465554,0.609488225
+available,Trust in emergency services and authorities (%),TSS observed,1,log1p_funding_per_100k_unocha,0.488829428,0.576026217,0.407881924,0.073785977,0.051800989,20,0.622281991,2.02911122,0.188968716
+available,Trust in emergency services and authorities (%),TSS observed,1,natural_hazard_inform,0.792040911,0.299081967,0.016902327,0.252001835,0.210803223,20,0.126840792,2.012250241,0.570868767
+available,Trust in emergency services and authorities (%),TSS observed,1,hdi_undp,-0.730567504,0.432911394,0.109754191,0.144999118,0.479387169,20,0.244089615,2.032377052,0.827952063
+available,Trust in emergency services and authorities (%),TSS observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,0.531425515,0.369210899,0.169327344,0.112093745,0.250413695,20,0.34912367,2.238657611,0.49889746
+available,Trust in emergency services and authorities (%),TSS observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.865606995,0.565764087,0.145551536,0.168298011,0.462115772,20,0.61950995,2.210869401,0.980045071
+available,Trust in emergency services and authorities (%),TSS observed,2,natural_hazard_inform + hdi_undp,-0.57897467,0.669702613,0.40007565,0.066476052,0.454658841,20,0.215895113,2.010230785,0.891172072
+available,Trust in emergency services and authorities (%),TSS observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-0.641279734,0.699618173,0.373847323,0.084300767,0.455108182,20,0.210155653,2.282780001,0.999651149
+common,Trust in emergency services and authorities (%),TSS observed,0,None (bivariate),0.58138565,0.374188333,0.137655952,0.144445719,0.096914926,20,0.372776625,1.979465554,0.609488225
+common,Trust in emergency services and authorities (%),TSS observed,1,log1p_funding_per_100k_unocha,0.488829428,0.576026217,0.407881924,0.073785977,0.051800989,20,0.622281991,2.02911122,0.188968716
+common,Trust in emergency services and authorities (%),TSS observed,1,natural_hazard_inform,0.792040911,0.299081967,0.016902327,0.252001835,0.210803223,20,0.126840792,2.012250241,0.570868767
+common,Trust in emergency services and authorities (%),TSS observed,1,hdi_undp,-0.730567504,0.432911394,0.109754191,0.144999118,0.479387169,20,0.244089615,2.032377052,0.827952063
+common,Trust in emergency services and authorities (%),TSS observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,0.531425515,0.369210899,0.169327344,0.112093745,0.250413695,20,0.34912367,2.238657611,0.49889746
+common,Trust in emergency services and authorities (%),TSS observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.865606995,0.565764087,0.145551536,0.168298011,0.462115772,20,0.61950995,2.210869401,0.980045071
+common,Trust in emergency services and authorities (%),TSS observed,2,natural_hazard_inform + hdi_undp,-0.57897467,0.669702613,0.40007565,0.066476052,0.454658841,20,0.215895113,2.010230785,0.891172072
+common,Trust in emergency services and authorities (%),TSS observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-0.641279734,0.699618173,0.373847323,0.084300767,0.455108182,20,0.210155653,2.282780001,0.999651149
+available,INFORM Coping Capacity (%),TSS-P observed,0,None (bivariate),1.949441865,0.611073746,0.002805216,0.231866102,0.212170361,41,0.444635521,1.827938065,0.552165114
+available,INFORM Coping Capacity (%),TSS-P observed,1,log1p_funding_per_100k_unocha,1.851486644,0.58956416,0.003260177,0.176733705,0.193704224,41,0.435162401,1.787058206,0.442211239
+available,INFORM Coping Capacity (%),TSS-P observed,1,natural_hazard_inform,1.72800519,0.685446825,0.01601872,0.194025185,0.24649089,41,0.401391748,1.804195457,0.966426377
+available,INFORM Coping Capacity (%),TSS-P observed,1,hdi_undp,-0.341625387,0.523949546,0.51831316,0.014959535,0.702592806,41,0.332513152,1.69047033,0.910167803
+available,INFORM Coping Capacity (%),TSS-P observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,1.446397009,0.604445648,0.021903518,0.11264231,0.240135254,41,0.557353748,1.66003139,0.960867188
+available,INFORM Coping Capacity (%),TSS-P observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.350466553,0.510948719,0.497043515,0.013885418,0.69457776,41,0.32859636,1.679048396,0.973003052
+available,INFORM Coping Capacity (%),TSS-P observed,2,natural_hazard_inform + hdi_undp,-0.432859574,0.515875584,0.406814534,0.024726245,0.711793507,41,0.220955117,1.712534699,0.907448252
+available,INFORM Coping Capacity (%),TSS-P observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-0.357908988,0.490354349,0.470175244,0.015423888,0.705764587,41,0.159860994,1.818322271,0.829352785
+common,INFORM Coping Capacity (%),TSS-P observed,0,None (bivariate),1.949441865,0.611073746,0.002805216,0.231866102,0.212170361,41,0.444635521,1.827938065,0.552165114
+common,INFORM Coping Capacity (%),TSS-P observed,1,log1p_funding_per_100k_unocha,1.851486644,0.58956416,0.003260177,0.176733705,0.193704224,41,0.435162401,1.787058206,0.442211239
+common,INFORM Coping Capacity (%),TSS-P observed,1,natural_hazard_inform,1.72800519,0.685446825,0.01601872,0.194025185,0.24649089,41,0.401391748,1.804195457,0.966426377
+common,INFORM Coping Capacity (%),TSS-P observed,1,hdi_undp,-0.341625387,0.523949546,0.51831316,0.014959535,0.702592806,41,0.332513152,1.69047033,0.910167803
+common,INFORM Coping Capacity (%),TSS-P observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,1.446397009,0.604445648,0.021903518,0.11264231,0.240135254,41,0.557353748,1.66003139,0.960867188
+common,INFORM Coping Capacity (%),TSS-P observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.350466553,0.510948719,0.497043515,0.013885418,0.69457776,41,0.32859636,1.679048396,0.973003052
+common,INFORM Coping Capacity (%),TSS-P observed,2,natural_hazard_inform + hdi_undp,-0.432859574,0.515875584,0.406814534,0.024726245,0.711793507,41,0.220955117,1.712534699,0.907448252
+common,INFORM Coping Capacity (%),TSS-P observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-0.357908988,0.490354349,0.470175244,0.015423888,0.705764587,41,0.159860994,1.818322271,0.829352785
+available,ND-GAIN Readiness (%),TSS-P observed,0,None (bivariate),2.320280753,0.502357631,4.14E-05,0.334678746,0.317619227,41,0.14080971,2.002588692,0.950451107
+available,ND-GAIN Readiness (%),TSS-P observed,1,log1p_funding_per_100k_unocha,2.205013213,0.547233504,2.59E-04,0.264061933,0.302859198,41,0.082412316,1.966389657,0.897947111
+available,ND-GAIN Readiness (%),TSS-P observed,1,natural_hazard_inform,1.995902198,0.561945391,0.001040397,0.298318059,0.420031112,41,0.57904697,1.970262883,0.774614947
+available,ND-GAIN Readiness (%),TSS-P observed,1,hdi_undp,0.210827284,0.398039342,0.599425769,0.006726169,0.741178446,41,0.126330504,1.550750272,0.992673193
+available,ND-GAIN Readiness (%),TSS-P observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,1.617786044,0.561654844,0.006570042,0.177455746,0.430090565,41,0.254808215,1.76168144,0.640111076
+available,ND-GAIN Readiness (%),TSS-P observed,2,log1p_funding_per_100k_unocha + hdi_undp,0.179870054,0.439001621,0.684370058,0.004328033,0.73447041,41,0.12913289,1.520400933,0.971275859
+available,ND-GAIN Readiness (%),TSS-P observed,2,natural_hazard_inform + hdi_undp,0.229734458,0.408687761,0.577419287,0.007849706,0.73493762,41,0.109249967,1.552379515,0.918926582
+available,ND-GAIN Readiness (%),TSS-P observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,0.181769202,0.447208277,0.68681594,0.004440198,0.728399674,41,0.122203949,1.495696369,0.950016892
+common,ND-GAIN Readiness (%),TSS-P observed,0,None (bivariate),2.320280753,0.502357631,4.14E-05,0.334678746,0.317619227,41,0.14080971,2.002588692,0.950451107
+common,ND-GAIN Readiness (%),TSS-P observed,1,log1p_funding_per_100k_unocha,2.205013213,0.547233504,2.59E-04,0.264061933,0.302859198,41,0.082412316,1.966389657,0.897947111
+common,ND-GAIN Readiness (%),TSS-P observed,1,natural_hazard_inform,1.995902198,0.561945391,0.001040397,0.298318059,0.420031112,41,0.57904697,1.970262883,0.774614947
+common,ND-GAIN Readiness (%),TSS-P observed,1,hdi_undp,0.210827284,0.398039342,0.599425769,0.006726169,0.741178446,41,0.126330504,1.550750272,0.992673193
+common,ND-GAIN Readiness (%),TSS-P observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,1.617786044,0.561654844,0.006570042,0.177455746,0.430090565,41,0.254808215,1.76168144,0.640111076
+common,ND-GAIN Readiness (%),TSS-P observed,2,log1p_funding_per_100k_unocha + hdi_undp,0.179870054,0.439001621,0.684370058,0.004328033,0.73447041,41,0.12913289,1.520400933,0.971275859
+common,ND-GAIN Readiness (%),TSS-P observed,2,natural_hazard_inform + hdi_undp,0.229734458,0.408687761,0.577419287,0.007849706,0.73493762,41,0.109249967,1.552379515,0.918926582
+common,ND-GAIN Readiness (%),TSS-P observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,0.181769202,0.447208277,0.68681594,0.004440198,0.728399674,41,0.122203949,1.495696369,0.950016892
+available,ND-GAIN Adaptive Capacity (%),TSS-P observed,0,None (bivariate),2.52361246,0.436513737,1.04E-06,0.48039171,0.46706842,41,0.844003297,1.910174802,0.251843882
+available,ND-GAIN Adaptive Capacity (%),TSS-P observed,1,log1p_funding_per_100k_unocha,2.225276065,0.506222534,8.58E-05,0.372398223,0.479033118,41,0.331252624,1.840386308,0.71356811
+available,ND-GAIN Adaptive Capacity (%),TSS-P observed,1,natural_hazard_inform,2.375657546,0.471710091,1.19E-05,0.450716525,0.483429887,41,0.622215679,1.937799131,0.566804778
+available,ND-GAIN Adaptive Capacity (%),TSS-P observed,1,hdi_undp,0.87779912,0.408910265,0.038264507,0.143057814,0.77915939,41,0.581626711,2.060066776,0.817812686
+available,ND-GAIN Adaptive Capacity (%),TSS-P observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,1.903610164,0.493807175,4.46E-04,0.300051086,0.518135692,41,0.33412299,1.773671164,0.860957967
+available,ND-GAIN Adaptive Capacity (%),TSS-P observed,2,log1p_funding_per_100k_unocha + hdi_undp,0.664026974,0.460860677,0.158039279,0.083247884,0.789804825,41,0.947969352,1.916048991,0.630556594
+available,ND-GAIN Adaptive Capacity (%),TSS-P observed,2,natural_hazard_inform + hdi_undp,0.802765924,0.398973486,0.051535127,0.127619467,0.787606251,41,0.768212491,2.039769967,0.83215751
+available,ND-GAIN Adaptive Capacity (%),TSS-P observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,0.660153145,0.457012234,0.157247018,0.084722667,0.790554864,41,0.843509075,1.95857031,0.946762545
+common,ND-GAIN Adaptive Capacity (%),TSS-P observed,0,None (bivariate),2.52361246,0.436513737,1.04E-06,0.48039171,0.46706842,41,0.844003297,1.910174802,0.251843882
+common,ND-GAIN Adaptive Capacity (%),TSS-P observed,1,log1p_funding_per_100k_unocha,2.225276065,0.506222534,8.58E-05,0.372398223,0.479033118,41,0.331252624,1.840386308,0.71356811
+common,ND-GAIN Adaptive Capacity (%),TSS-P observed,1,natural_hazard_inform,2.375657546,0.471710091,1.19E-05,0.450716525,0.483429887,41,0.622215679,1.937799131,0.566804778
+common,ND-GAIN Adaptive Capacity (%),TSS-P observed,1,hdi_undp,0.87779912,0.408910265,0.038264507,0.143057814,0.77915939,41,0.581626711,2.060066776,0.817812686
+common,ND-GAIN Adaptive Capacity (%),TSS-P observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,1.903610164,0.493807175,4.46E-04,0.300051086,0.518135692,41,0.33412299,1.773671164,0.860957967
+common,ND-GAIN Adaptive Capacity (%),TSS-P observed,2,log1p_funding_per_100k_unocha + hdi_undp,0.664026974,0.460860677,0.158039279,0.083247884,0.789804825,41,0.947969352,1.916048991,0.630556594
+common,ND-GAIN Adaptive Capacity (%),TSS-P observed,2,natural_hazard_inform + hdi_undp,0.802765924,0.398973486,0.051535127,0.127619467,0.787606251,41,0.768212491,2.039769967,0.83215751
+common,ND-GAIN Adaptive Capacity (%),TSS-P observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,0.660153145,0.457012234,0.157247018,0.084722667,0.790554864,41,0.843509075,1.95857031,0.946762545
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-P observed,0,None (bivariate),-0.29349146,0.129018093,0.028495522,0.121523336,0.098998293,41,0.293284755,1.799720435,0.291181918
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-P observed,1,log1p_funding_per_100k_unocha,-0.341457764,0.172490458,0.055028806,0.129861875,0.08785299,41,0.259665665,1.750667423,0.318240621
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-P observed,1,natural_hazard_inform,-0.197391897,0.135310209,0.152834411,0.073994386,0.315047257,41,0.419777629,1.641592205,0.389531508
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-P observed,1,hdi_undp,7.36E-04,0.155762609,0.996252651,6.65E-07,0.270225665,41,0.188940009,1.895642418,0.506893827
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-P observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,-0.185470356,0.175729334,0.298070994,0.049589798,0.297115582,41,0.467811484,1.64285556,0.446973656
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-P observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.053216923,0.187320922,0.777921495,0.00313243,0.270295842,41,0.187487895,1.825310052,0.471109061
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-P observed,2,natural_hazard_inform + hdi_undp,-0.045333644,0.154075916,0.770227116,0.00285244,0.352145434,41,0.367689821,1.738680696,0.702687103
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-P observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-0.056436583,0.184306636,0.761208515,0.003970252,0.335152574,41,0.33074822,1.73594362,0.809526023
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-P observed,0,None (bivariate),-0.29349146,0.129018093,0.028495522,0.121523336,0.098998293,41,0.293284755,1.799720435,0.291181918
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-P observed,1,log1p_funding_per_100k_unocha,-0.341457764,0.172490458,0.055028806,0.129861875,0.08785299,41,0.259665665,1.750667423,0.318240621
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-P observed,1,natural_hazard_inform,-0.197391897,0.135310209,0.152834411,0.073994386,0.315047257,41,0.419777629,1.641592205,0.389531508
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-P observed,1,hdi_undp,7.36E-04,0.155762609,0.996252651,6.65E-07,0.270225665,41,0.188940009,1.895642418,0.506893827
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-P observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,-0.185470356,0.175729334,0.298070994,0.049589798,0.297115582,41,0.467811484,1.64285556,0.446973656
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-P observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.053216923,0.187320922,0.777921495,0.00313243,0.270295842,41,0.187487895,1.825310052,0.471109061
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-P observed,2,natural_hazard_inform + hdi_undp,-0.045333644,0.154075916,0.770227116,0.00285244,0.352145434,41,0.367689821,1.738680696,0.702687103
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-P observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-0.056436583,0.184306636,0.761208515,0.003970252,0.335152574,41,0.33074822,1.73594362,0.809526023
+available,Reliance on non-profits in first days of crisis (%),TSS-P observed,0,None (bivariate),1.434479302,0.438907046,0.004269703,0.192520654,0.147660691,20,0.007292604,2.122823881,0.590714974
+available,Reliance on non-profits in first days of crisis (%),TSS-P observed,1,log1p_funding_per_100k_unocha,0.367363027,0.683355035,0.597829567,0.009660417,0.232195163,20,0.002338427,2.152930183,0.668978639
+available,Reliance on non-profits in first days of crisis (%),TSS-P observed,1,natural_hazard_inform,0.951852659,0.419853804,0.036715324,0.109333553,0.308198592,20,0.002370713,1.895799597,0.502979427
+available,Reliance on non-profits in first days of crisis (%),TSS-P observed,1,hdi_undp,1.162507897,0.675895014,0.103591812,0.060479861,0.102868573,20,0.013231264,2.095348947,0.61976368
+available,Reliance on non-profits in first days of crisis (%),TSS-P observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,0.443817086,1.111466501,0.6949459,0.016320798,0.302005664,20,0.010272069,1.965324374,0.3373101
+available,Reliance on non-profits in first days of crisis (%),TSS-P observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.217874872,1.091574205,0.844310428,0.001744373,0.204149474,20,0.009596657,2.069871695,0.627254197
+available,Reliance on non-profits in first days of crisis (%),TSS-P observed,2,natural_hazard_inform + hdi_undp,-0.413426054,1.196448223,0.734186401,0.008802832,0.358375499,20,0.087514601,1.63728354,0.27058702
+available,Reliance on non-profits in first days of crisis (%),TSS-P observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-0.890754664,2.178606876,0.688417122,0.034562424,0.352801785,20,0.196665764,1.667380246,0.193815306
+common,Reliance on non-profits in first days of crisis (%),TSS-P observed,0,None (bivariate),1.434479302,0.438907046,0.004269703,0.192520654,0.147660691,20,0.007292604,2.122823881,0.590714974
+common,Reliance on non-profits in first days of crisis (%),TSS-P observed,1,log1p_funding_per_100k_unocha,0.367363027,0.683355035,0.597829567,0.009660417,0.232195163,20,0.002338427,2.152930183,0.668978639
+common,Reliance on non-profits in first days of crisis (%),TSS-P observed,1,natural_hazard_inform,0.951852659,0.419853804,0.036715324,0.109333553,0.308198592,20,0.002370713,1.895799597,0.502979427
+common,Reliance on non-profits in first days of crisis (%),TSS-P observed,1,hdi_undp,1.162507897,0.675895014,0.103591812,0.060479861,0.102868573,20,0.013231264,2.095348947,0.61976368
+common,Reliance on non-profits in first days of crisis (%),TSS-P observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,0.443817086,1.111466501,0.6949459,0.016320798,0.302005664,20,0.010272069,1.965324374,0.3373101
+common,Reliance on non-profits in first days of crisis (%),TSS-P observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.217874872,1.091574205,0.844310428,0.001744373,0.204149474,20,0.009596657,2.069871695,0.627254197
+common,Reliance on non-profits in first days of crisis (%),TSS-P observed,2,natural_hazard_inform + hdi_undp,-0.413426054,1.196448223,0.734186401,0.008802832,0.358375499,20,0.087514601,1.63728354,0.27058702
+common,Reliance on non-profits in first days of crisis (%),TSS-P observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-0.890754664,2.178606876,0.688417122,0.034562424,0.352801785,20,0.196665764,1.667380246,0.193815306
+available,Trust in emergency services and authorities (%),TSS-P observed,0,None (bivariate),0.898116045,0.484074695,0.080002171,0.169427979,0.123285089,20,0.347523902,1.968284481,0.32174284
+available,Trust in emergency services and authorities (%),TSS-P observed,1,log1p_funding_per_100k_unocha,0.875861452,0.861054511,0.323319086,0.093365367,0.071845123,20,0.375048547,1.976982294,0.242822369
+available,Trust in emergency services and authorities (%),TSS-P observed,1,natural_hazard_inform,1.187354553,0.414211825,0.010693846,0.281182245,0.241590846,20,0.358460477,2.024812499,0.384145416
+available,Trust in emergency services and authorities (%),TSS-P observed,1,hdi_undp,-0.572331486,0.558883656,0.320158364,0.051611606,0.422523208,20,0.053772883,1.9041537,0.850383891
+available,Trust in emergency services and authorities (%),TSS-P observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,0.804955672,0.580190657,0.184342758,0.10131007,0.241309924,20,0.318093114,2.251695658,0.523285043
+available,Trust in emergency services and authorities (%),TSS-P observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.842918356,1.441350126,0.566830588,0.072259706,0.400005196,20,0.431741755,2.003702009,0.751144117
+available,Trust in emergency services and authorities (%),TSS-P observed,2,natural_hazard_inform + hdi_undp,-0.228479531,0.719873413,0.75505309,0.006688533,0.419732479,20,0.069779769,1.926806035,0.84008998
+available,Trust in emergency services and authorities (%),TSS-P observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-0.583584852,1.401232191,0.682957313,0.037521755,0.427272077,20,0.151542287,2.156957084,0.974188225
+common,Trust in emergency services and authorities (%),TSS-P observed,0,None (bivariate),0.898116045,0.484074695,0.080002171,0.169427979,0.123285089,20,0.347523902,1.968284481,0.32174284
+common,Trust in emergency services and authorities (%),TSS-P observed,1,log1p_funding_per_100k_unocha,0.875861452,0.861054511,0.323319086,0.093365367,0.071845123,20,0.375048547,1.976982294,0.242822369
+common,Trust in emergency services and authorities (%),TSS-P observed,1,natural_hazard_inform,1.187354553,0.414211825,0.010693846,0.281182245,0.241590846,20,0.358460477,2.024812499,0.384145416
+common,Trust in emergency services and authorities (%),TSS-P observed,1,hdi_undp,-0.572331486,0.558883656,0.320158364,0.051611606,0.422523208,20,0.053772883,1.9041537,0.850383891
+common,Trust in emergency services and authorities (%),TSS-P observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,0.804955672,0.580190657,0.184342758,0.10131007,0.241309924,20,0.318093114,2.251695658,0.523285043
+common,Trust in emergency services and authorities (%),TSS-P observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.842918356,1.441350126,0.566830588,0.072259706,0.400005196,20,0.431741755,2.003702009,0.751144117
+common,Trust in emergency services and authorities (%),TSS-P observed,2,natural_hazard_inform + hdi_undp,-0.228479531,0.719873413,0.75505309,0.006688533,0.419732479,20,0.069779769,1.926806035,0.84008998
+common,Trust in emergency services and authorities (%),TSS-P observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-0.583584852,1.401232191,0.682957313,0.037521755,0.427272077,20,0.151542287,2.156957084,0.974188225
+available,INFORM Coping Capacity (%),TSS-V observed,0,None (bivariate),3.291865105,0.761142958,1.02E-04,0.205352181,0.184976596,41,0.593018344,2.099745349,0.31741556
+available,INFORM Coping Capacity (%),TSS-V observed,1,log1p_funding_per_100k_unocha,2.999952795,0.760015718,3.30E-04,0.1717663,0.188839215,41,0.524653001,1.960917933,0.226647807
+available,INFORM Coping Capacity (%),TSS-V observed,1,natural_hazard_inform,2.930230997,0.712753715,2.03E-04,0.176272125,0.229893483,41,0.083059801,2.051335219,0.633104027
+available,INFORM Coping Capacity (%),TSS-V observed,1,hdi_undp,0.295689822,0.67354733,0.66314499,0.004329652,0.699383391,41,0.110783707,1.680535536,0.541381836
+available,INFORM Coping Capacity (%),TSS-V observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,2.478299651,0.630375113,3.57E-04,0.129983678,0.254985065,41,0.455150997,1.779720834,0.790524391
+available,INFORM Coping Capacity (%),TSS-V observed,2,log1p_funding_per_100k_unocha + hdi_undp,0.314886036,0.693095693,0.652253894,0.00486335,0.691783419,41,0.12346049,1.738290777,0.715296131
+available,INFORM Coping Capacity (%),TSS-V observed,2,natural_hazard_inform + hdi_undp,0.214941997,0.736929774,0.772166283,0.002383499,0.705190925,41,0.116113391,1.680396323,0.528707015
+available,INFORM Coping Capacity (%),TSS-V observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,0.259846951,0.765210258,0.736149129,0.003518927,0.702206852,41,0.086144663,1.862065829,0.641666145
+common,INFORM Coping Capacity (%),TSS-V observed,0,None (bivariate),3.291865105,0.761142958,1.02E-04,0.205352181,0.184976596,41,0.593018344,2.099745349,0.31741556
+common,INFORM Coping Capacity (%),TSS-V observed,1,log1p_funding_per_100k_unocha,2.999952795,0.760015718,3.30E-04,0.1717663,0.188839215,41,0.524653001,1.960917933,0.226647807
+common,INFORM Coping Capacity (%),TSS-V observed,1,natural_hazard_inform,2.930230997,0.712753715,2.03E-04,0.176272125,0.229893483,41,0.083059801,2.051335219,0.633104027
+common,INFORM Coping Capacity (%),TSS-V observed,1,hdi_undp,0.295689822,0.67354733,0.66314499,0.004329652,0.699383391,41,0.110783707,1.680535536,0.541381836
+common,INFORM Coping Capacity (%),TSS-V observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,2.478299651,0.630375113,3.57E-04,0.129983678,0.254985065,41,0.455150997,1.779720834,0.790524391
+common,INFORM Coping Capacity (%),TSS-V observed,2,log1p_funding_per_100k_unocha + hdi_undp,0.314886036,0.693095693,0.652253894,0.00486335,0.691783419,41,0.12346049,1.738290777,0.715296131
+common,INFORM Coping Capacity (%),TSS-V observed,2,natural_hazard_inform + hdi_undp,0.214941997,0.736929774,0.772166283,0.002383499,0.705190925,41,0.116113391,1.680396323,0.528707015
+common,INFORM Coping Capacity (%),TSS-V observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,0.259846951,0.765210258,0.736149129,0.003518927,0.702206852,41,0.086144663,1.862065829,0.641666145
+available,ND-GAIN Readiness (%),TSS-V observed,0,None (bivariate),4.237050907,0.846680284,1.24E-05,0.346635468,0.329882531,41,0.233948125,2.356800259,0.987646685
+available,ND-GAIN Readiness (%),TSS-V observed,1,log1p_funding_per_100k_unocha,3.912109921,0.851706218,4.69E-05,0.307706312,0.344202729,41,0.263708317,2.230955575,0.333896284
+available,ND-GAIN Readiness (%),TSS-V observed,1,natural_hazard_inform,3.729467441,0.749659024,1.44E-05,0.329083855,0.445460303,41,0.051458701,2.317199023,0.34277198
+available,ND-GAIN Readiness (%),TSS-V observed,1,hdi_undp,1.484637197,0.642165491,0.026297599,0.128859725,0.773003302,41,0.795382462,1.611693317,0.270728726
+available,ND-GAIN Readiness (%),TSS-V observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,3.195717941,0.684785171,3.93E-05,0.272169496,0.495714098,41,0.197041865,1.941595653,0.747218145
+available,ND-GAIN Readiness (%),TSS-V observed,2,log1p_funding_per_100k_unocha + hdi_undp,1.47515187,0.667137722,0.033283602,0.126301703,0.766998813,41,0.804930591,1.586674866,0.436105754
+available,ND-GAIN Readiness (%),TSS-V observed,2,natural_hazard_inform + hdi_undp,1.509850351,0.685188041,0.033858441,0.132549248,0.768252288,41,0.858750762,1.621606325,0.294274448
+available,ND-GAIN Readiness (%),TSS-V observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,1.493002867,0.694206358,0.038291376,0.129660988,0.762561366,41,0.861728579,1.556856396,0.494030037
+common,ND-GAIN Readiness (%),TSS-V observed,0,None (bivariate),4.237050907,0.846680284,1.24E-05,0.346635468,0.329882531,41,0.233948125,2.356800259,0.987646685
+common,ND-GAIN Readiness (%),TSS-V observed,1,log1p_funding_per_100k_unocha,3.912109921,0.851706218,4.69E-05,0.307706312,0.344202729,41,0.263708317,2.230955575,0.333896284
+common,ND-GAIN Readiness (%),TSS-V observed,1,natural_hazard_inform,3.729467441,0.749659024,1.44E-05,0.329083855,0.445460303,41,0.051458701,2.317199023,0.34277198
+common,ND-GAIN Readiness (%),TSS-V observed,1,hdi_undp,1.484637197,0.642165491,0.026297599,0.128859725,0.773003302,41,0.795382462,1.611693317,0.270728726
+common,ND-GAIN Readiness (%),TSS-V observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,3.195717941,0.684785171,3.93E-05,0.272169496,0.495714098,41,0.197041865,1.941595653,0.747218145
+common,ND-GAIN Readiness (%),TSS-V observed,2,log1p_funding_per_100k_unocha + hdi_undp,1.47515187,0.667137722,0.033283602,0.126301703,0.766998813,41,0.804930591,1.586674866,0.436105754
+common,ND-GAIN Readiness (%),TSS-V observed,2,natural_hazard_inform + hdi_undp,1.509850351,0.685188041,0.033858441,0.132549248,0.768252288,41,0.858750762,1.621606325,0.294274448
+common,ND-GAIN Readiness (%),TSS-V observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,1.493002867,0.694206358,0.038291376,0.129660988,0.762561366,41,0.861728579,1.556856396,0.494030037
+available,ND-GAIN Adaptive Capacity (%),TSS-V observed,0,None (bivariate),3.336625559,0.892102314,5.90E-04,0.260833698,0.241880715,41,0.142135621,2.141969736,0.723877327
+available,ND-GAIN Adaptive Capacity (%),TSS-V observed,1,log1p_funding_per_100k_unocha,2.756525561,0.826760113,0.001918035,0.211541099,0.345506992,41,0.242478216,2.091486122,0.581759399
+available,ND-GAIN Adaptive Capacity (%),TSS-V observed,1,natural_hazard_inform,3.036683981,0.922276224,0.002151581,0.232673492,0.278372718,41,0.621734069,2.145192006,0.831846465
+available,ND-GAIN Adaptive Capacity (%),TSS-V observed,1,hdi_undp,0.660717032,0.727789566,0.369683965,0.031312279,0.750361704,41,0.267167649,2.120345667,0.274181738
+available,ND-GAIN Adaptive Capacity (%),TSS-V observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,2.260910102,0.845224977,0.011065017,0.166364414,0.426102066,41,0.366239333,1.946234783,0.88779519
+available,ND-GAIN Adaptive Capacity (%),TSS-V observed,2,log1p_funding_per_100k_unocha + hdi_undp,0.525305505,0.673411222,0.440313617,0.022604171,0.775900286,41,0.496917383,1.972642479,0.284194569
+available,ND-GAIN Adaptive Capacity (%),TSS-V observed,2,natural_hazard_inform + hdi_undp,0.575544394,0.664391936,0.391923714,0.025645141,0.762779116,41,0.779420855,2.09716219,0.306736679
+available,ND-GAIN Adaptive Capacity (%),TSS-V observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,0.496911298,0.643399677,0.444965084,0.020777547,0.775922147,41,0.71467157,2.014028794,0.456402496
+common,ND-GAIN Adaptive Capacity (%),TSS-V observed,0,None (bivariate),3.336625559,0.892102314,5.90E-04,0.260833698,0.241880715,41,0.142135621,2.141969736,0.723877327
+common,ND-GAIN Adaptive Capacity (%),TSS-V observed,1,log1p_funding_per_100k_unocha,2.756525561,0.826760113,0.001918035,0.211541099,0.345506992,41,0.242478216,2.091486122,0.581759399
+common,ND-GAIN Adaptive Capacity (%),TSS-V observed,1,natural_hazard_inform,3.036683981,0.922276224,0.002151581,0.232673492,0.278372718,41,0.621734069,2.145192006,0.831846465
+common,ND-GAIN Adaptive Capacity (%),TSS-V observed,1,hdi_undp,0.660717032,0.727789566,0.369683965,0.031312279,0.750361704,41,0.267167649,2.120345667,0.274181738
+common,ND-GAIN Adaptive Capacity (%),TSS-V observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,2.260910102,0.845224977,0.011065017,0.166364414,0.426102066,41,0.366239333,1.946234783,0.88779519
+common,ND-GAIN Adaptive Capacity (%),TSS-V observed,2,log1p_funding_per_100k_unocha + hdi_undp,0.525305505,0.673411222,0.440313617,0.022604171,0.775900286,41,0.496917383,1.972642479,0.284194569
+common,ND-GAIN Adaptive Capacity (%),TSS-V observed,2,natural_hazard_inform + hdi_undp,0.575544394,0.664391936,0.391923714,0.025645141,0.762779116,41,0.779420855,2.09716219,0.306736679
+common,ND-GAIN Adaptive Capacity (%),TSS-V observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,0.496911298,0.643399677,0.444965084,0.020777547,0.775922147,41,0.71467157,2.014028794,0.456402496
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-V observed,0,None (bivariate),-0.464729856,0.205620456,0.02947296,0.094638635,0.071424241,41,0.327188553,1.940236912,0.131349409
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-V observed,1,log1p_funding_per_100k_unocha,-0.469932802,0.215893451,0.035785883,0.091056323,0.047173967,41,0.317873466,1.936940826,0.296267082
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-V observed,1,natural_hazard_inform,-0.316510492,0.228186352,0.173503018,0.060107443,0.304775289,41,0.472542935,1.75217216,0.49648391
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-V observed,1,hdi_undp,-0.061395875,0.227366948,0.788598364,0.001785744,0.27152837,41,0.187894222,1.88831772,0.176305678
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-V observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,-0.2793818,0.231200064,0.234560608,0.044227687,0.293149984,41,0.535523659,1.735807779,0.586044623
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-V observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.085234829,0.235036396,0.71893332,0.003486414,0.270554957,41,0.174406164,1.849675446,0.267611
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-V observed,2,natural_hazard_inform + hdi_undp,-0.106938794,0.22824435,0.642155965,0.006205178,0.354323734,41,0.394286614,1.7580232,0.458059376
+available,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-V observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-0.109672077,0.233673872,0.641658167,0.006489558,0.336834204,41,0.36613513,1.760710153,0.608563114
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-V observed,0,None (bivariate),-0.464729856,0.205620456,0.02947296,0.094638635,0.071424241,41,0.327188553,1.940236912,0.131349409
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-V observed,1,log1p_funding_per_100k_unocha,-0.469932802,0.215893451,0.035785883,0.091056323,0.047173967,41,0.317873466,1.936940826,0.296267082
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-V observed,1,natural_hazard_inform,-0.316510492,0.228186352,0.173503018,0.060107443,0.304775289,41,0.472542935,1.75217216,0.49648391
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-V observed,1,hdi_undp,-0.061395875,0.227366948,0.788598364,0.001785744,0.27152837,41,0.187894222,1.88831772,0.176305678
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-V observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,-0.2793818,0.231200064,0.234560608,0.044227687,0.293149984,41,0.535523659,1.735807779,0.586044623
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-V observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.085234829,0.235036396,0.71893332,0.003486414,0.270554957,41,0.174406164,1.849675446,0.267611
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-V observed,2,natural_hazard_inform + hdi_undp,-0.106938794,0.22824435,0.642155965,0.006205178,0.354323734,41,0.394286614,1.7580232,0.458059376
+common,"EM-DAT Disaster-Affected Population (log1p, 2015-2024 average, per 100k)",TSS-V observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-0.109672077,0.233673872,0.641658167,0.006489558,0.336834204,41,0.36613513,1.760710153,0.608563114
+available,Reliance on non-profits in first days of crisis (%),TSS-V observed,0,None (bivariate),1.279610844,0.862689947,0.155298563,0.056814984,0.004415816,20,0.0602375,2.154401078,0.672234148
+available,Reliance on non-profits in first days of crisis (%),TSS-V observed,1,log1p_funding_per_100k_unocha,0.39435137,0.560605509,0.491305505,0.007027548,0.230153914,20,0.006099921,2.137715879,0.600186958
+available,Reliance on non-profits in first days of crisis (%),TSS-V observed,1,natural_hazard_inform,0.360185679,1.144694754,0.75685152,0.005802639,0.227783716,20,0.027272323,1.978957327,0.499006978
+available,Reliance on non-profits in first days of crisis (%),TSS-V observed,1,hdi_undp,-0.222582795,0.842475882,0.794801445,0.001074502,0.046143429,20,0.035148061,2.057269565,0.685681749
+available,Reliance on non-profits in first days of crisis (%),TSS-V observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,0.048220188,1.251770153,0.969748368,1.17E-04,0.290507968,20,0.025611593,2.029745885,0.290257043
+available,Reliance on non-profits in first days of crisis (%),TSS-V observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.245795398,0.711907922,0.734394033,0.001667389,0.204088099,20,0.006512809,2.093134842,0.743063661
+available,Reliance on non-profits in first days of crisis (%),TSS-V observed,2,natural_hazard_inform + hdi_undp,-2.591725776,3.2716732,0.439848651,0.181901761,0.470426378,20,0.341669083,1.566910764,0.073226782
+available,Reliance on non-profits in first days of crisis (%),TSS-V observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-2.544005429,3.664096453,0.498103437,0.157801371,0.435417201,20,0.330143457,1.583772087,0.112282428
+common,Reliance on non-profits in first days of crisis (%),TSS-V observed,0,None (bivariate),1.279610844,0.862689947,0.155298563,0.056814984,0.004415816,20,0.0602375,2.154401078,0.672234148
+common,Reliance on non-profits in first days of crisis (%),TSS-V observed,1,log1p_funding_per_100k_unocha,0.39435137,0.560605509,0.491305505,0.007027548,0.230153914,20,0.006099921,2.137715879,0.600186958
+common,Reliance on non-profits in first days of crisis (%),TSS-V observed,1,natural_hazard_inform,0.360185679,1.144694754,0.75685152,0.005802639,0.227783716,20,0.027272323,1.978957327,0.499006978
+common,Reliance on non-profits in first days of crisis (%),TSS-V observed,1,hdi_undp,-0.222582795,0.842475882,0.794801445,0.001074502,0.046143429,20,0.035148061,2.057269565,0.685681749
+common,Reliance on non-profits in first days of crisis (%),TSS-V observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,0.048220188,1.251770153,0.969748368,1.17E-04,0.290507968,20,0.025611593,2.029745885,0.290257043
+common,Reliance on non-profits in first days of crisis (%),TSS-V observed,2,log1p_funding_per_100k_unocha + hdi_undp,-0.245795398,0.711907922,0.734394033,0.001667389,0.204088099,20,0.006512809,2.093134842,0.743063661
+common,Reliance on non-profits in first days of crisis (%),TSS-V observed,2,natural_hazard_inform + hdi_undp,-2.591725776,3.2716732,0.439848651,0.181901761,0.470426378,20,0.341669083,1.566910764,0.073226782
+common,Reliance on non-profits in first days of crisis (%),TSS-V observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-2.544005429,3.664096453,0.498103437,0.157801371,0.435417201,20,0.330143457,1.583772087,0.112282428
+available,Trust in emergency services and authorities (%),TSS-V observed,0,None (bivariate),0.849342842,0.90534363,0.360589016,0.056195895,0.003762333,20,0.407750296,2.061950151,0.870682833
+available,Trust in emergency services and authorities (%),TSS-V observed,1,log1p_funding_per_100k_unocha,0.582883218,1.021351269,0.575671089,0.026104189,0.002987407,20,0.851240062,2.157879247,0.217599481
+available,Trust in emergency services and authorities (%),TSS-V observed,1,natural_hazard_inform,1.253520403,0.801504505,0.136250379,0.11615785,0.067477156,20,0.333501606,2.080481849,0.879096281
+available,Trust in emergency services and authorities (%),TSS-V observed,1,hdi_undp,-1.499464115,1.024435226,0.161521968,0.171683735,0.495635519,20,0.199935767,2.121635906,0.821128171
+available,Trust in emergency services and authorities (%),TSS-V observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,0.960009323,0.595931433,0.126741814,0.087631775,0.229762463,20,0.642521205,2.32845956,0.38398864
+available,Trust in emergency services and authorities (%),TSS-V observed,2,log1p_funding_per_100k_unocha + hdi_undp,-1.499039259,1.06737312,0.17930883,0.171638819,0.464276363,20,0.213013916,2.108821234,0.845645339
+available,Trust in emergency services and authorities (%),TSS-V observed,2,natural_hazard_inform + hdi_undp,-1.244073295,1.262322704,0.339027344,0.104270217,0.476737239,20,0.254683561,2.109830856,0.915613569
+available,Trust in emergency services and authorities (%),TSS-V observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-1.091363088,1.360393814,0.434940461,0.073451449,0.448652236,20,0.170454779,2.205922204,0.983558297
+common,Trust in emergency services and authorities (%),TSS-V observed,0,None (bivariate),0.849342842,0.90534363,0.360589016,0.056195895,0.003762333,20,0.407750296,2.061950151,0.870682833
+common,Trust in emergency services and authorities (%),TSS-V observed,1,log1p_funding_per_100k_unocha,0.582883218,1.021351269,0.575671089,0.026104189,0.002987407,20,0.851240062,2.157879247,0.217599481
+common,Trust in emergency services and authorities (%),TSS-V observed,1,natural_hazard_inform,1.253520403,0.801504505,0.136250379,0.11615785,0.067477156,20,0.333501606,2.080481849,0.879096281
+common,Trust in emergency services and authorities (%),TSS-V observed,1,hdi_undp,-1.499464115,1.024435226,0.161521968,0.171683735,0.495635519,20,0.199935767,2.121635906,0.821128171
+common,Trust in emergency services and authorities (%),TSS-V observed,2,log1p_funding_per_100k_unocha + natural_hazard_inform,0.960009323,0.595931433,0.126741814,0.087631775,0.229762463,20,0.642521205,2.32845956,0.38398864
+common,Trust in emergency services and authorities (%),TSS-V observed,2,log1p_funding_per_100k_unocha + hdi_undp,-1.499039259,1.06737312,0.17930883,0.171638819,0.464276363,20,0.213013916,2.108821234,0.845645339
+common,Trust in emergency services and authorities (%),TSS-V observed,2,natural_hazard_inform + hdi_undp,-1.244073295,1.262322704,0.339027344,0.104270217,0.476737239,20,0.254683561,2.109830856,0.915613569
+common,Trust in emergency services and authorities (%),TSS-V observed,3,log1p_funding_per_100k_unocha + natural_hazard_inform + hdi_undp,-1.091363088,1.360393814,0.434940461,0.073451449,0.448652236,20,0.170454779,2.205922204,0.983558297

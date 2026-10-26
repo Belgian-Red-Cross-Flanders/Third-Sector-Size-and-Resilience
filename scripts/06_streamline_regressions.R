@@ -30,23 +30,23 @@ y_vars <- tibble::tibble(
 
 x_vars <- tibble::tibble(
   xvar  = c(
-    # "Total_tpt",
-    # "Paid.staff_tpt",
-    # "Volunteers_tpt",
-    # "volunteer_sp547_eurobar"
-    "TSS.observed",
-    "TSS.P.observed",
-    "TSS.V.observed"
+    "Total_tpt",
+    "Paid.staff_tpt",
+    "Volunteers_tpt",
+    "volunteer_sp547_eurobar"
+    # "TSS.observed",
+    # "TSS.P.observed",
+    # "TSS.V.observed"
     
   ),
   xlab  = c(
-    # "TSS",
-    # "TSS-P",
-    # "TSS-V",
-    # "EU-VOL"
-    "TSS observed",
-    "TSS-P observed",
-    "TSS-V observed"
+    "TSS",
+    "TSS-P",
+    "TSS-V",
+    "EU-VOL"
+    # "TSS observed",
+    # "TSS-P observed",
+    # "TSS-V observed"
   ),
 )
 
